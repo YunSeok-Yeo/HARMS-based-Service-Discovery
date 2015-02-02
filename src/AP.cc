@@ -19,10 +19,11 @@ Define_Module(AP);
 
 void AP::initialize()
 {
-    // TODO - Generated method body
+    PortableDevice::initialize();
+    Service = APSERVICE;
 }
 
 void AP::handleMessage(cMessage *msg)
 {
-    // TODO - Generated method body
+    PortableDevice::handleMessage(msg);
 }

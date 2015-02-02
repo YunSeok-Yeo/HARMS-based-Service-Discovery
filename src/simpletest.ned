@@ -18,6 +18,19 @@ package servicediscovery;
 //
 // TODO auto-generated type
 //
+
+channel Link extends ned.DatarateChannel
+{
+    parameters:
+        int cost = default(0);
+        @display("ls=red,,d");
+}
+
+channel WiredLink extends ned.DatarateChannel
+{
+    parameters:
+        int cost = default(0);
+}
 network Simpletest
 {
     submodules:
@@ -51,6 +64,12 @@ network Simpletest
         PortableDevice9: PortableDevice {
             @display("p=146,532");
         }
+        AP1: AP {
+            @display("p=157,127");
+        }
+        AP2: AP {
+            @display("p=410,127");
+        }
     connections:
         PortableDevice0.g++ <--> Link <--> PortableDevice1.g++;
         PortableDevice0.g++ <--> Link <--> PortableDevice3.g++;
@@ -62,4 +81,9 @@ network Simpletest
         PortableDevice9.g++ <--> Link <--> PortableDevice7.g++;
         PortableDevice5.g++ <--> Link <--> PortableDevice7.g++;
         PortableDevice7.g++ <--> Link <--> PortableDevice6.g++;
+        AP1.g++ <--> WiredLink <--> AP2.g++;
+        AP1.g++ <--> Link <--> PortableDevice5.g++;
+        AP1.g++ <--> Link <--> PortableDevice6.g++;
+        AP2.g++ <--> Link <--> PortableDevice8.g++;
+        AP2.g++ <--> Link <--> PortableDevice4.g++;
 }

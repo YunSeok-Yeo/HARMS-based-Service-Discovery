@@ -13,39 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include <omnetpp.h>
-#include <string>
-#include <sstream>
-#include "CustomPacket.h"
-#include "NodeTable.h"
-#include "RoutingTable.h"
-#include "Cache.h"
-
-using namespace std;
-
-class PortableDevice : public cSimpleModule{
-
-    protected:
-        virtual void forwardMessage(CustomPacket *msg);
-        virtual void initialize();
-        virtual void handleMessage(cMessage *msg);
-        virtual void Reply(CustomPacket *packet);
-        virtual void Query(CustomPacket *packet);
-        virtual void Notice(CustomPacket *packet);
-        virtual void Retransmit(CustomPacket *packet);
-        virtual void Hello(CustomPacket *packet);
-        virtual CustomPacket* GeneratePacket(const char *name, int destinationId, int destinationService, int type, int maxHopCount);
-        void UpdateTables(string lastHop, int gateId, int maxHopCount);
-        int Service;
-        int ID;
-        CustomPacket *query, *timer;
-        NodeTable nodeTable;
-        RoutingTable routingTable;
-        Cache cache;
-        int seqNum;
-        int currentState;
-};
-
+#include "PortableDevice.h"
+#include <string.h>
 Define_Module(PortableDevice);
 
 /*
@@ -65,7 +34,7 @@ void PortableDevice::initialize()
 
     CustomPacket *hello = GeneratePacket("hello", 255, 0, HELLO, 1);
     timer = new CustomPacket("timer");
-    query = GeneratePacket("query", 255, intuniform(0, 10), QUERY, 5);
+    query = GeneratePacket("query", 255, APSERVICE, QUERY, 5);
 
     string s;
     stringstream out;
@@ -77,7 +46,8 @@ void PortableDevice::initialize()
     currentState = HELLO;
     EV << ID << " Send Hello Message" << endl;
     forwardMessage(hello);
-    if(ID % 2 == 0){
+
+    if(ID % 2 == 0 && strstr(getFullName(), "AP") == NULL){
         scheduleAt(uniform(1, 5), timer);
     }
     else

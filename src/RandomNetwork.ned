@@ -16,12 +16,6 @@
 package servicediscovery;
 
 
-channel Link extends ned.DatarateChannel {
-    parameters:
-        int cost = default(0);
-        @display("ls=red,,d");
-}
-
 //
 // Generated network with random topology (50 PortableDevices, 80 edges, seed=8765).
 //

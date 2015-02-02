@@ -17,11 +17,12 @@
 #define __SERVICEDISCOVERY_AP_H_
 
 #include <omnetpp.h>
+#include "PortableDevice.h"
 
 /**
  * TODO - Generated class
  */
-class AP : public cSimpleModule
+class AP : public PortableDevice
 {
   protected:
     virtual void initialize();

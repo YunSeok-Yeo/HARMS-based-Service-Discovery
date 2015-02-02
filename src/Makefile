@@ -33,6 +33,7 @@ OBJS = \
     $O/PortableDevice.o \
     $O/Wireless.o \
     $O/Cache.o \
+    $O/AP.o \
     $O/CustomPacket.o \
     $O/NodeTable.o
 
@@ -120,6 +121,13 @@ depend:
 	$(Q)$(MAKEDEPEND) $(INCLUDE_PATH) -f Makefile -P\$$O/ -- $(MSG_CC_FILES)  ./*.cc
 
 # DO NOT DELETE THIS LINE -- make depend depends on it.
+$O/AP.o: AP.cc \
+	AP.h \
+	Cache.h \
+	CustomPacket.h \
+	NodeTable.h \
+	PortableDevice.h \
+	RoutingTable.h
 $O/Cache.o: Cache.cc \
 	Cache.h
 $O/CustomPacket.o: CustomPacket.cc \
@@ -130,6 +138,7 @@ $O/PortableDevice.o: PortableDevice.cc \
 	Cache.h \
 	CustomPacket.h \
 	NodeTable.h \
+	PortableDevice.h \
 	RoutingTable.h
 $O/RoutingTable.o: RoutingTable.cc \
 	RoutingTable.h
