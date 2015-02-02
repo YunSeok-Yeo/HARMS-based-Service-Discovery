@@ -34,20 +34,25 @@ channel WiredLink extends ned.DatarateChannel
 network Simpletest
 {
     submodules:
+        Server: Server_DNS_ {
+
+            @display("p=291,36");
+        }
+
         PortableDevice0: PortableDevice {
-            @display("p=379,506");
+            @display("p=433,330");
         }
         PortableDevice1: PortableDevice {
-            @display("p=523,506");
+            @display("p=541,426");
         }
         PortableDevice2: PortableDevice {
-            @display("p=535,378");
+            @display("p=574,297");
         }
         PortableDevice3: PortableDevice {
-            @display("p=291,565");
+            @display("p=66,513");
         }
         PortableDevice4: PortableDevice {
-            @display("p=496,248");
+            @display("p=535,55");
         }
         PortableDevice5: PortableDevice {
             @display("p=192,272");
@@ -59,7 +64,7 @@ network Simpletest
             @display("p=118,393");
         }
         PortableDevice8: PortableDevice {
-            @display("p=347,265");
+            @display("p=484,195");
         }
         PortableDevice9: PortableDevice {
             @display("p=146,532");
@@ -72,11 +77,12 @@ network Simpletest
         }
     connections:
         PortableDevice0.g++ <--> Link <--> PortableDevice1.g++;
-        PortableDevice0.g++ <--> Link <--> PortableDevice3.g++;
+        PortableDevice0.g++ <--> Link <--> PortableDevice2.g++;
+        PortableDevice0.g++ <--> Link <--> PortableDevice8.g++;
         PortableDevice1.g++ <--> Link <--> PortableDevice2.g++;
         PortableDevice2.g++ <--> Link <--> PortableDevice4.g++;
         PortableDevice3.g++ <--> Link <--> PortableDevice9.g++;
-        PortableDevice5.g++ <--> Link <--> PortableDevice8.g++;
+        PortableDevice3.g++ <--> Link <--> PortableDevice7.g++;
         PortableDevice4.g++ <--> Link <--> PortableDevice8.g++;
         PortableDevice9.g++ <--> Link <--> PortableDevice7.g++;
         PortableDevice5.g++ <--> Link <--> PortableDevice7.g++;
@@ -86,4 +92,6 @@ network Simpletest
         AP1.g++ <--> Link <--> PortableDevice6.g++;
         AP2.g++ <--> Link <--> PortableDevice8.g++;
         AP2.g++ <--> Link <--> PortableDevice4.g++;
+        Server.g++ <--> WiredLink <--> AP1.g++;
+        Server.g++ <--> WiredLink <--> AP2.g++;
 }

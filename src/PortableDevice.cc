@@ -87,14 +87,20 @@ void PortableDevice::handleMessage(cMessage *msg)
 
     if(msg->isSelfMessage())
     {
+        if(nodeTable.FindService(APSERVICE) == -1){
+            // This is selfMessage
+            EV << "Node:" << ID << " send message " << query << " to find Service:" << Service << "\n";
+            currentState = QUERY;
+            forwardMessage(query);
+        }else{
+            currentState = -1;
+            delete query;
+        }
 
-        // This is selfMessage
-        EV << "Node:" << ID << " send message " << query << " to find Service:" << Service << "\n";
 
         delete packet;
 
-        currentState = QUERY;
-        forwardMessage(query);
+
         return;
     }
 
@@ -199,8 +205,8 @@ void PortableDevice::Reply(CustomPacket *packet){
             EV << ID << " Get Hello Message" << endl;
         }else if(currentState == QUERY){
             EV << "Node:" << ID << " find Service:" << Service << "\n";
-            currentState = -1;
         }
+        currentState = -1;
         delete packet;
     }
 }
@@ -219,10 +225,28 @@ CustomPacket* PortableDevice::GeneratePacket(const char* name, int destinationId
 void PortableDevice::Query(CustomPacket *packet){
     int sourceId = packet->GetSource();
     int maxHopCount = packet->GetMaxHopCount();
+    int targetId = ID;
     string lastHop = packet->GetLastHop();
 
     //limit hop
-    if(maxHopCount <= 0)
+    if(packet->GetDestination() != 255 && packet->GetDestination() != ID)
+    {
+        forwardMessage(packet);
+    }
+    else if(Service == packet->GetDestinationService() || (targetId = nodeTable.FindService(packet->GetDestinationService())) != -1)
+    {
+        // This node has a target service.
+
+        CustomPacket *reply = GeneratePacket("reply", sourceId, 0, REPLY, 5);
+        stringstream out;
+
+        out << targetId << "," << packet->GetDestinationService() << "|"; //To reach destination service, Source should send packet to this node.
+        reply->SetLastHop(out.str());
+
+        forwardMessage(reply);
+        delete packet;
+    }
+    else if(maxHopCount <= 0)
     {
         CustomPacket *notice = GeneratePacket("notice", sourceId, packet->GetDestinationService(), NOTICE, 5);
         stringstream out;
@@ -232,19 +256,6 @@ void PortableDevice::Query(CustomPacket *packet){
         notice->SetOriginSourceSeqNum(packet->GetSeqNum());
 
         forwardMessage(notice);
-        delete packet;
-    }
-    else if(Service == packet->GetDestinationService() || nodeTable.FindService(packet->GetDestinationService()) != -1)
-    {
-        // This node has a target service.
-
-        CustomPacket *reply = GeneratePacket("reply", sourceId, 0, REPLY, 5);
-        stringstream out;
-
-        out << ID << "," << Service << "|";
-        reply->SetLastHop(out.str());
-
-        forwardMessage(reply);
         delete packet;
     }
     else

@@ -31,6 +31,7 @@ O = $(PROJECT_OUTPUT_DIR)/$(CONFIGNAME)/$(PROJECTRELATIVE_PATH)
 OBJS = \
     $O/RoutingTable.o \
     $O/PortableDevice.o \
+    $O/Server_DNS_.o \
     $O/Wireless.o \
     $O/Cache.o \
     $O/AP.o \
@@ -142,6 +143,8 @@ $O/PortableDevice.o: PortableDevice.cc \
 	RoutingTable.h
 $O/RoutingTable.o: RoutingTable.cc \
 	RoutingTable.h
+$O/Server_DNS_.o: Server_DNS_.cc \
+	Server_DNS_.h
 $O/Wireless.o: Wireless.cc \
 	Wireless.h
 
