@@ -13,14 +13,19 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package servicediscovery;
+#ifndef __SERVICEDISCOVERY_AP_H_
+#define __SERVICEDISCOVERY_AP_H_
 
+#include <omnetpp.h>
 
-simple PortableDevice
+/**
+ * TODO - Generated class
+ */
+class AP : public cSimpleModule
 {
-    parameters:
-        @display("i=device/wifilaptop;r=150");
-    gates:
-        inout g[];
+  protected:
+    virtual void initialize();
+    virtual void handleMessage(cMessage *msg);
+};
 
-}
+#endif

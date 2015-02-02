@@ -264,7 +264,7 @@ void PortableDevice::Query(CustomPacket *packet){
         forwardMessage(notice);
         delete packet;
     }
-    else if(Service == packet->GetDestinationService() && nodeTable.FindService(packet->GetDestinationService()) != -1)
+    else if(Service == packet->GetDestinationService() || nodeTable.FindService(packet->GetDestinationService()) != -1)
     {
         // This node has a target service.
 

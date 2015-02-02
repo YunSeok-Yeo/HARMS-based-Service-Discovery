@@ -15,12 +15,11 @@
 
 package servicediscovery;
 
-
-simple PortableDevice
+//
+// TODO auto-generated module
+//
+simple AP
 {
     parameters:
-        @display("i=device/wifilaptop;r=150");
-    gates:
-        inout g[];
-
+    	@display("i=device/accesspoint");
 }

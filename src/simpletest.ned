@@ -22,19 +22,19 @@ network Simpletest
 {
     submodules:
         PortableDevice0: PortableDevice {
-            @display("p=249,424");
+            @display("p=379,506");
         }
         PortableDevice1: PortableDevice {
-            @display("p=350,406");
+            @display("p=523,506");
         }
         PortableDevice2: PortableDevice {
-            @display("p=341,358");
+            @display("p=535,378");
         }
         PortableDevice3: PortableDevice {
-            @display("p=177,382");
+            @display("p=291,565");
         }
         PortableDevice4: PortableDevice {
-            @display("p=307,312");
+            @display("p=496,248");
         }
         PortableDevice5: PortableDevice {
             @display("p=192,272");
@@ -43,22 +43,19 @@ network Simpletest
             @display("p=79,248");
         }
         PortableDevice7: PortableDevice {
-            @display("p=107,312");
+            @display("p=118,393");
         }
         PortableDevice8: PortableDevice {
-            @display("p=243,333");
+            @display("p=347,265");
         }
         PortableDevice9: PortableDevice {
-            @display("p=107,358");
+            @display("p=146,532");
         }
     connections:
         PortableDevice0.g++ <--> Link <--> PortableDevice1.g++;
-        PortableDevice0.g++ <--> Link <--> PortableDevice2.g++;
         PortableDevice0.g++ <--> Link <--> PortableDevice3.g++;
         PortableDevice1.g++ <--> Link <--> PortableDevice2.g++;
         PortableDevice2.g++ <--> Link <--> PortableDevice4.g++;
-        PortableDevice3.g++ <--> Link <--> PortableDevice5.g++;
-        PortableDevice3.g++ <--> Link <--> PortableDevice8.g++;
         PortableDevice3.g++ <--> Link <--> PortableDevice9.g++;
         PortableDevice5.g++ <--> Link <--> PortableDevice8.g++;
         PortableDevice4.g++ <--> Link <--> PortableDevice8.g++;

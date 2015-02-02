@@ -13,14 +13,16 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package servicediscovery;
+#include "AP.h"
 
+Define_Module(AP);
 
-simple PortableDevice
+void AP::initialize()
 {
-    parameters:
-        @display("i=device/wifilaptop;r=150");
-    gates:
-        inout g[];
+    // TODO - Generated method body
+}
 
+void AP::handleMessage(cMessage *msg)
+{
+    // TODO - Generated method body
 }
