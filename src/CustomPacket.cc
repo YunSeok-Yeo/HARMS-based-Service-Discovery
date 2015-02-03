@@ -212,12 +212,12 @@ string CustomPacket::GetLastHop() const
 void CustomPacket::SetLastHop(string lastHop){
     this->lastHop = lastHop;
 }
-int CustomPacket::GetDestinationLocation() const
+int CustomPacket::GetLocation() const
 {
-    return destinationLocation;
+    return location;
 }
-void CustomPacket::SetDestinationLocation(int destinationLocation){
-    this->destinationLocation = destinationLocation;
+void CustomPacket::SetLocation(int Location){
+    this->location = location;
 }
 int CustomPacket::GetHopCount() const
 {
@@ -320,7 +320,7 @@ const char *CustomPacketDescriptor::getFieldName(void *object, int field) const
         "originSourceId",
         "originSourceSeqNum",
         "lastHop",
-        "destinationLocation",
+        "location",
         "hopCount",
     };
     return (field>=0 && field<11) ? fieldNames[field] : NULL;
@@ -340,7 +340,7 @@ int CustomPacketDescriptor::findField(void *object, const char *fieldName) const
     if (fieldName[0]=='o' && strcmp(fieldName, "originSourceId")==0) return base+7;
     if (fieldName[0]=='o' && strcmp(fieldName, "originSourceSeqNum")==0) return base+8;
     if (fieldName[0]=='l' && strcmp(fieldName, "lastHop")==0) return base+9;
-    if (fieldName[0]=='d' && strcmp(fieldName, "destinationLocation")==0) return base+10;
+    if (fieldName[0]=='l' && strcmp(fieldName, "location")==0) return base+10;
     if (fieldName[0]=='h' && strcmp(fieldName, "hopCount")==0) return base+11;
     return basedesc ? basedesc->findField(object, fieldName) : -1;
 }
@@ -417,7 +417,7 @@ std::string CustomPacketDescriptor::getFieldAsString(void *object, int field, in
         case 7: return long2string(pp->GetOriginSourceId());
         case 8: return long2string(pp->GetOriginSourceSeqNum());
         case 9: return pp->GetLastHop();
-        case 10: return long2string(pp->GetDestinationLocation());
+        case 10: return long2string(pp->GetLocation());
         case 11: return long2string(pp->GetHopCount());
         default: return "";
     }
@@ -443,7 +443,7 @@ bool CustomPacketDescriptor::setFieldAsString(void *object, int field, int i, co
         case 7: pp->SetOriginSourceId(string2long(value)); return true;
         case 8: pp->SetOriginSourceSeqNum(string2long(value)); return true;
         case 9: pp->SetLastHop(value); return true;
-        case 10: pp->SetDestinationLocation(string2long(value)); return true;
+        case 10: pp->SetLocation(string2long(value)); return true;
         case 11: pp->SetHopCount(string2long(value)); return true;
         default: return false;
     }

@@ -29,7 +29,8 @@ class AP : public PortableDevice
     virtual void handleMessage(cMessage *msg);
     virtual void Register(CustomPacket *packet);
     virtual void Query(CustomPacket *packet);
-    int DNS;
+    int DNS, Location;
+    int ServiceArray[SERVICENUM];
 };
 
 #endif

@@ -47,7 +47,7 @@ class CustomPacket : public ::cMessage
     int originSourceId;
     int originSourceSeqNum;
     string lastHop;
-    int destinationLocation;
+    int location;
     int hopCount;
 
   private:
@@ -88,8 +88,8 @@ class CustomPacket : public ::cMessage
     virtual void SetOriginSourceSeqNum(int originSourceSeqNum);
     virtual string GetLastHop() const;
     virtual void SetLastHop(string lastHop);
-    virtual int GetDestinationLocation() const;
-    virtual void SetDestinationLocation(int destinationLocation);
+    virtual int GetLocation() const;
+    virtual void SetLocation(int location);
     virtual int GetHopCount() const;
     virtual void SetHopCount(int hopCount);
 };

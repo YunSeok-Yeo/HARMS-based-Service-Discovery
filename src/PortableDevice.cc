@@ -29,15 +29,15 @@ void PortableDevice::initialize()
 {
 
     ID = getId();
-    Service = intuniform(0, 10);
+    Service = intuniform(0, SERVICENUM);
     int APs = getParentModule()->par("APs");
 
     CustomPacket *hello = GeneratePacket("hello", 255, 0, HELLO, 1);
     timer1 = new CustomPacket("timer1");
     timer2 = new CustomPacket("timer2");
     findAP = GeneratePacket("findAP", 255, APSERVICE, REGISTER, 5);
-    query =  GeneratePacket("query", 255, intuniform(0, 10), QUERY, 5);
-    query->SetDestinationLocation(intuniform(0, APs));
+    query =  GeneratePacket("query", 255, intuniform(0, SERVICENUM), QUERY, 5);
+    query->SetLocation(intuniform(0, APs));
     string s;
     stringstream out;
     out << ID <<"," << Service << "|";

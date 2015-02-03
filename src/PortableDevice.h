@@ -31,7 +31,7 @@
 #include "NodeTable.h"
 #include "RoutingTable.h"
 #include "Cache.h"
-
+#define SERVICENUM 10
 /**
  * TODO - Generated class
  */

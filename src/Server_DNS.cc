@@ -80,37 +80,12 @@ void Server_DNS::Query(CustomPacket *packet){
 
 void Server_DNS::Register(CustomPacket *packet){
     string lastHop = packet->GetLastHop();
-    string token, secondToken;
-    size_t pos, secondPos;
-    string delimiter = "|", secondDelimiter = ",";
-    if((pos = lastHop.find(delimiter)) != string::npos){
-        token = lastHop.substr(0, pos);
+    int deliPos = lastHop.find(",");
+    int Source = atoi(lastHop.substr(0, deliPos).c_str());
+    int Service = atoi(lastHop.substr(deliPos + 1, lastHop.find("|") - deliPos - 1).c_str());
 
-        secondPos = token.find(secondDelimiter);
-        secondToken = token.substr(0, secondPos);
+    EV << "DNS -> " << Source << ":" << Service << "\n";
+    nodeTable.UpdateEntry(Source, Service, packet->GetLocation(), 10);
 
-        int id = atoi(secondToken.c_str());
-
-        token.erase(0, secondPos + secondDelimiter.length());
-        nodeTable.UpdateEntry(id, atoi(token.c_str()), 0, 10);
-
-        lastHop.erase(0, pos + delimiter.length());
-    }
     delete packet;
-    /*
-    while ((pos = lastHop.find(delimiter)) != string::npos) {
-
-        token = lastHop.substr(0, pos);
-
-        secondPos = token.find(secondDelimiter);
-        secondToken = token.substr(0, secondPos);
-
-        int id = atoi(secondToken.c_str());
-
-        token.erase(0, secondPos + secondDelimiter.length());
-        nodeTable.UpdateEntry(id, atoi(token.c_str()), 0, 10);
-
-        lastHop.erase(0, pos + delimiter.length());
-    }
-    */
 }

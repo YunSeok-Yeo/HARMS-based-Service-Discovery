@@ -14,14 +14,20 @@
 // 
 
 #include "AP.h"
+#include <string>
 
 Define_Module(AP);
+using namespace std;
 
 void AP::initialize()
 {
     PortableDevice::initialize();
     Service = APSERVICE;
     DNS = -1;
+    Location = par("location");
+    for(int i = 0; i < SERVICENUM ; i++){
+        ServiceArray[i] = 0;
+    }
 }
 
 void AP::handleMessage(cMessage *msg)
@@ -56,7 +62,21 @@ void AP::Register(CustomPacket *packet){
     forwardMessage(reply);
     if(DNS == -1)
         DNS = nodeTable.FindService(DNSSERVICE);
-    packet->SetDestination(DNS);
-    forwardMessage(packet);
-    //delete packet;
+
+
+    //Get Source service number
+    string lastHop = packet->GetLastHop();
+    int Service = atoi(lastHop.substr(lastHop.find(",") + 1, lastHop.find("|") - lastHop.find(",") - 1).c_str());
+    ServiceArray[Service]++;
+
+    EV << "AP -> " << ServiceArray[Service] << ":" << Service << "\n";
+    //If target service provider is only one, then forward message to server to register.
+    if(ServiceArray[Service] == 1){
+        packet->SetDestination(DNS);
+        packet->SetLocation(Location);
+
+        forwardMessage(packet);
+    }else{
+        delete packet;
+    }
 }
