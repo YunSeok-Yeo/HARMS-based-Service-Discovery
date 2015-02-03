@@ -21,7 +21,7 @@ package servicediscovery;
 simple Wireless
 {
     gates:
-        input radioIn @directIn;
+        inout g[];
 
 }
 

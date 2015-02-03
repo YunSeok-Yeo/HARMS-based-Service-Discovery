@@ -31,7 +31,7 @@
 #include "NodeTable.h"
 #include "RoutingTable.h"
 #include "Cache.h"
-#define APSERVICE 9999
+
 /**
  * TODO - Generated class
  */
@@ -48,11 +48,12 @@ class PortableDevice : public cSimpleModule
         virtual void Notice(CustomPacket *packet);
         virtual void Retransmit(CustomPacket *packet);
         virtual void Hello(CustomPacket *packet);
+        virtual void Register(CustomPacket *packet);
         virtual CustomPacket* GeneratePacket(const char *name, int destinationId, int destinationService, int type, int maxHopCount);
         void UpdateTables(string lastHop, int gateId, int maxHopCount);
         int Service;
         int ID;
-        CustomPacket *query, *timer;
+        CustomPacket *query, *timer1, *findAP, *timer2;
         NodeTable nodeTable;
         RoutingTable routingTable;
         Cache cache;

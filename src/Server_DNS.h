@@ -13,23 +13,28 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __SERVICEDISCOVERY_AP_H_
-#define __SERVICEDISCOVERY_AP_H_
+#ifndef __SERVICEDISCOVERY_SERVER_DNS__H_
+#define __SERVICEDISCOVERY_SERVER_DNS__H_
 
 #include <omnetpp.h>
-#include "PortableDevice.h"
+#include "CustomPacket.h"
+#include "NodeTable.h"
 
 /**
  * TODO - Generated class
  */
-class AP : public PortableDevice
+class Server_DNS : public cSimpleModule
 {
   protected:
     virtual void initialize();
     virtual void handleMessage(cMessage *msg);
+    NodeTable nodeTable;
+    //RoutingTable routingTable;
     virtual void Register(CustomPacket *packet);
     virtual void Query(CustomPacket *packet);
-    int DNS;
+    virtual CustomPacket* GeneratePacket(const char* name, int destinationId, int destinationService, int type, int maxHopCount);
+    virtual void Hello(CustomPacket *packet);
+    int ID, seqNum, Service;
 };
 
 #endif

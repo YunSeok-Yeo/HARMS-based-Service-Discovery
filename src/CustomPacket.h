@@ -29,6 +29,9 @@
 #define NOTICE 2
 #define RETRANSMIT 3
 #define HELLO 4
+#define REGISTER 5
+#define APSERVICE 9999
+#define DNSSERVICE 9998
 
 using namespace std;
 class CustomPacket : public ::cMessage

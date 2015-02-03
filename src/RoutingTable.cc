@@ -14,6 +14,7 @@
 // 
 
 #include <RoutingTable.h>
+#include <omnetpp.h>
 RoutingTable::RoutingTable() {
     // TODO Auto-generated constructor stub
 

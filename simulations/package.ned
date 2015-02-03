@@ -1,3 +1,3 @@
-package servicediscovery.simulations;
+package servicediscovery;
 
 @license(LGPL);

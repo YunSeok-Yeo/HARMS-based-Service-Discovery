@@ -13,17 +13,15 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "Server_DNS_.h"
+package servicediscovery;
 
-Define_Module(Server_DNS_);
-
-void Server_DNS_::initialize()
+//
+// TODO auto-generated module
+//
+simple Server_DNS
 {
-    // TODO - Generated method body
-}
-
-void Server_DNS_::handleMessage(cMessage *msg)
-{
-    delete msg;
-    // TODO - Generated method body
+    parameters:
+        @display("i=device/server");
+    gates:
+        inout g[];
 }

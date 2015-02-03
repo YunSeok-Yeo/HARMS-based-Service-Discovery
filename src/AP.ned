@@ -22,6 +22,7 @@ simple AP
 {
     parameters:
     	@display("i=device/accesspoint");
+    	int location = default(0);
   	gates:
     	inout g[];
 }

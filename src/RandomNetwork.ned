@@ -20,9 +20,15 @@ package servicediscovery;
 // Generated network with random topology (50 PortableDevices, 80 edges, seed=8765).
 //
 network RandomNetwork {
+    parameters:
+        int APs = 0;
     submodules:
-        PortableDevice0 : PortableDevice;
-        PortableDevice1 : PortableDevice;
+        PortableDevice0 : PortableDevice{
+            @display("r=0");
+        }
+        PortableDevice1 : PortableDevice{
+            @display("r=0");
+        }
         PortableDevice2 : PortableDevice;
         PortableDevice3 : PortableDevice;
         PortableDevice4 : PortableDevice;

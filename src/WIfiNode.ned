@@ -13,19 +13,10 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __SERVICEDISCOVERY_SERVER_DNS__H_
-#define __SERVICEDISCOVERY_SERVER_DNS__H_
+package servicediscovery;
 
-#include <omnetpp.h>
 
-/**
- * TODO - Generated class
- */
-class Server_DNS_ : public cSimpleModule
-{
-  protected:
-    virtual void initialize();
-    virtual void handleMessage(cMessage *msg);
-};
-
-#endif
+module WifiNode{
+ 	submodules:
+ 	       
+}
