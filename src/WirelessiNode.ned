@@ -17,18 +17,16 @@ package servicediscovery;
 
 import inet.base.NotificationBoard;
 import inet.linklayer.ieee80211.Ieee80211Nic;
-import inet.mobility.single.CircleMobility;
-import servicediscovery.Wireless.Wireless;
+import inet.mobility.single.RandomWPMobility;
 
 
-module AP
+module WirelessNode
 {
     parameters:
         @display("i=device/wifilaptop");
         @node();
     gates:
         input radioIn @directIn;
-        inout g;
 
     submodules:
         notificationBoard: NotificationBoard {
@@ -40,13 +38,16 @@ module AP
                 @display("p=112,134;q=queue");
                 mgmtType = "Ieee80211MgmtAdhoc";
         }
-        cli: APCli {
+        cli: PortableDevice {
             parameters:
                 @display("b=40,24;p=180,60,col");
+        }
+        mobility: RandomWPMobility {
+            parameters:
+                @display("p=50,141");
         }
     connections allowunconnected:
         wlan.radioIn <-- radioIn;
         cli.out --> wlan.upperLayerIn;
         cli.in <-- wlan.upperLayerOut;
-        cli.g <--> g;
 }

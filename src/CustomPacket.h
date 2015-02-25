@@ -17,7 +17,10 @@
 #define CustomPacket_H_
 
 #include <omnetpp.h>
+#include <simkerneldefs.h>
 #include <string>
+
+class cCommBuffer;
 
 #define MSGC_VERSION 0x0405
 #if (MSGC_VERSION!=OMNETPP_VERSION)
@@ -34,7 +37,7 @@
 #define DNSSERVICE 9998
 
 using namespace std;
-class CustomPacket : public ::cMessage
+class CustomPacket : public ::cPacket
 {
   protected:
     int type;                   //message type

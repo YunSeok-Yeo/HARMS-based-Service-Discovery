@@ -1,0 +1,287 @@
+file 15719 1424681457                                           
+version 2
+run Throughput1-0-20150223-17:50:26-5767
+attr configname Throughput1
+attr datetime 20150223-17:50:26
+attr experiment Throughput1
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvars2 $repetition=0
+attr measurement ""
+attr network WirelessNetwork
+attr processid 5767
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+
+vector 0  WirelessNetwork.cliHost[0].wlan.mgmt  dataQueueLen:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "data queue length, vector"
+vector 10  WirelessNetwork.cliHost[1].wlan.mgmt  dataQueueLen:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "data queue length, vector"
+vector 20  WirelessNetwork.cliHost[2].wlan.mgmt  dataQueueLen:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "data queue length, vector"
+vector 30  WirelessNetwork.cliHost[3].wlan.mgmt  dataQueueLen:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "data queue length, vector"
+vector 40  WirelessNetwork.cliHost[4].wlan.mgmt  dataQueueLen:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "data queue length, vector"
+vector 50  WirelessNetwork.cliHost[5].wlan.mgmt  dataQueueLen:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "data queue length, vector"
+vector 61  WirelessNetwork.cliHost[0].wlan.mac  RadioState  ETV
+attr enum  "IDLE=0, OFF=4, RECV=1, SLEEP=3, TRANSMIT=2"
+attr enumname  RadioState
+vector 60  WirelessNetwork.cliHost[0].wlan.mac  State  ETV
+attr enum  "BACKOFF=3, DEFER=1, IDLE=0, RECEIVE=8, WAITACK=4, WAITAIFS=2, WAITCTS=6, WAITMULTICAST=5, WAITSIFS=7"
+attr enumname  Ieee80211Mac
+vector 67  WirelessNetwork.cliHost[1].wlan.mac  RadioState  ETV
+attr enum  "IDLE=0, OFF=4, RECV=1, SLEEP=3, TRANSMIT=2"
+attr enumname  RadioState
+vector 66  WirelessNetwork.cliHost[1].wlan.mac  State  ETV
+attr enum  "BACKOFF=3, DEFER=1, IDLE=0, RECEIVE=8, WAITACK=4, WAITAIFS=2, WAITCTS=6, WAITMULTICAST=5, WAITSIFS=7"
+attr enumname  Ieee80211Mac
+vector 73  WirelessNetwork.cliHost[2].wlan.mac  RadioState  ETV
+attr enum  "IDLE=0, OFF=4, RECV=1, SLEEP=3, TRANSMIT=2"
+attr enumname  RadioState
+vector 72  WirelessNetwork.cliHost[2].wlan.mac  State  ETV
+attr enum  "BACKOFF=3, DEFER=1, IDLE=0, RECEIVE=8, WAITACK=4, WAITAIFS=2, WAITCTS=6, WAITMULTICAST=5, WAITSIFS=7"
+attr enumname  Ieee80211Mac
+vector 79  WirelessNetwork.cliHost[3].wlan.mac  RadioState  ETV
+attr enum  "IDLE=0, OFF=4, RECV=1, SLEEP=3, TRANSMIT=2"
+attr enumname  RadioState
+vector 78  WirelessNetwork.cliHost[3].wlan.mac  State  ETV
+attr enum  "BACKOFF=3, DEFER=1, IDLE=0, RECEIVE=8, WAITACK=4, WAITAIFS=2, WAITCTS=6, WAITMULTICAST=5, WAITSIFS=7"
+attr enumname  Ieee80211Mac
+vector 85  WirelessNetwork.cliHost[4].wlan.mac  RadioState  ETV
+attr enum  "IDLE=0, OFF=4, RECV=1, SLEEP=3, TRANSMIT=2"
+attr enumname  RadioState
+vector 84  WirelessNetwork.cliHost[4].wlan.mac  State  ETV
+attr enum  "BACKOFF=3, DEFER=1, IDLE=0, RECEIVE=8, WAITACK=4, WAITAIFS=2, WAITCTS=6, WAITMULTICAST=5, WAITSIFS=7"
+attr enumname  Ieee80211Mac
+vector 91  WirelessNetwork.cliHost[5].wlan.mac  RadioState  ETV
+attr enum  "IDLE=0, OFF=4, RECV=1, SLEEP=3, TRANSMIT=2"
+attr enumname  RadioState
+vector 90  WirelessNetwork.cliHost[5].wlan.mac  State  ETV
+attr enum  "BACKOFF=3, DEFER=1, IDLE=0, RECEIVE=8, WAITACK=4, WAITAIFS=2, WAITCTS=6, WAITMULTICAST=5, WAITSIFS=7"
+attr enumname  Ieee80211Mac
+vector 6  WirelessNetwork.cliHost[0].wlan.radio  bitrate:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "tx bitrate, vector"
+attr unit  bps
+vector 8  WirelessNetwork.cliHost[0].wlan.radio  radioState:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "radio state (enum), vector"
+vector 7  WirelessNetwork.cliHost[0].wlan.radio  channelNo:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "channel no, vector"
+vector 16  WirelessNetwork.cliHost[1].wlan.radio  bitrate:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "tx bitrate, vector"
+attr unit  bps
+vector 18  WirelessNetwork.cliHost[1].wlan.radio  radioState:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "radio state (enum), vector"
+vector 17  WirelessNetwork.cliHost[1].wlan.radio  channelNo:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "channel no, vector"
+vector 26  WirelessNetwork.cliHost[2].wlan.radio  bitrate:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "tx bitrate, vector"
+attr unit  bps
+vector 28  WirelessNetwork.cliHost[2].wlan.radio  radioState:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "radio state (enum), vector"
+vector 27  WirelessNetwork.cliHost[2].wlan.radio  channelNo:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "channel no, vector"
+vector 36  WirelessNetwork.cliHost[3].wlan.radio  bitrate:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "tx bitrate, vector"
+attr unit  bps
+vector 38  WirelessNetwork.cliHost[3].wlan.radio  radioState:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "radio state (enum), vector"
+vector 37  WirelessNetwork.cliHost[3].wlan.radio  channelNo:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "channel no, vector"
+vector 46  WirelessNetwork.cliHost[4].wlan.radio  bitrate:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "tx bitrate, vector"
+attr unit  bps
+vector 48  WirelessNetwork.cliHost[4].wlan.radio  radioState:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "radio state (enum), vector"
+vector 47  WirelessNetwork.cliHost[4].wlan.radio  channelNo:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "channel no, vector"
+vector 56  WirelessNetwork.cliHost[5].wlan.radio  bitrate:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "tx bitrate, vector"
+attr unit  bps
+vector 58  WirelessNetwork.cliHost[5].wlan.radio  radioState:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "radio state (enum), vector"
+vector 57  WirelessNetwork.cliHost[5].wlan.radio  channelNo:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "channel no, vector"
+vector 24  WirelessNetwork.cliHost[2].wlan.mac  rcvdPkFromHL:vector(packetBytes)  ETV
+attr interpolationmode  none
+attr source  packetReceivedFromUpper
+attr title  "packets received from higher layer, vector(packetBytes)"
+vector 75  WirelessNetwork.cliHost[2].wlan.mac  "throughput AC0"  ETV
+vector 23  WirelessNetwork.cliHost[2].wlan.mac  sentDownPk:vector(packetBytes)  ETV
+attr interpolationmode  none
+attr source  packetSentToLower
+attr title  "packets sent to lower layer, vector(packetBytes)"
+vector 69  WirelessNetwork.cliHost[1].wlan.mac  "throughput AC0"  ETV
+vector 81  WirelessNetwork.cliHost[3].wlan.mac  "throughput AC0"  ETV
+vector 63  WirelessNetwork.cliHost[0].wlan.mac  "throughput AC0"  ETV
+vector 87  WirelessNetwork.cliHost[4].wlan.mac  "throughput AC0"  ETV
+vector 93  WirelessNetwork.cliHost[5].wlan.mac  "throughput AC0"  ETV
+vector 71  WirelessNetwork.cliHost[1].wlan.radio  snirVector  ETV
+vector 83  WirelessNetwork.cliHost[3].wlan.radio  snirVector  ETV
+vector 15  WirelessNetwork.cliHost[1].wlan.mac  rcvdPkFromLL:vector(packetBytes)  ETV
+attr interpolationmode  none
+attr source  packetReceivedFromLower
+attr title  "packets received from lower layer, vector(packetBytes)"
+vector 12  WirelessNetwork.cliHost[1].wlan.mac  passedUpPk:vector(packetBytes)  ETV
+attr interpolationmode  none
+attr source  packetSentToUpper
+attr title  "packets passed to higher layer, vector(packetBytes)"
+vector 35  WirelessNetwork.cliHost[3].wlan.mac  rcvdPkFromLL:vector(packetBytes)  ETV
+attr interpolationmode  none
+attr source  packetReceivedFromLower
+attr title  "packets received from lower layer, vector(packetBytes)"
+vector 32  WirelessNetwork.cliHost[3].wlan.mac  passedUpPk:vector(packetBytes)  ETV
+attr interpolationmode  none
+attr source  packetSentToUpper
+attr title  "packets passed to higher layer, vector(packetBytes)"
+vector 65  WirelessNetwork.cliHost[0].wlan.radio  snirVector  ETV
+vector 89  WirelessNetwork.cliHost[4].wlan.radio  snirVector  ETV
+vector 5  WirelessNetwork.cliHost[0].wlan.mac  rcvdPkFromLL:vector(packetBytes)  ETV
+attr interpolationmode  none
+attr source  packetReceivedFromLower
+attr title  "packets received from lower layer, vector(packetBytes)"
+vector 2  WirelessNetwork.cliHost[0].wlan.mac  passedUpPk:vector(packetBytes)  ETV
+attr interpolationmode  none
+attr source  packetSentToUpper
+attr title  "packets passed to higher layer, vector(packetBytes)"
+vector 45  WirelessNetwork.cliHost[4].wlan.mac  rcvdPkFromLL:vector(packetBytes)  ETV
+attr interpolationmode  none
+attr source  packetReceivedFromLower
+attr title  "packets received from lower layer, vector(packetBytes)"
+vector 42  WirelessNetwork.cliHost[4].wlan.mac  passedUpPk:vector(packetBytes)  ETV
+attr interpolationmode  none
+attr source  packetSentToUpper
+attr title  "packets passed to higher layer, vector(packetBytes)"
+vector 95  WirelessNetwork.cliHost[5].wlan.radio  snirVector  ETV
+vector 55  WirelessNetwork.cliHost[5].wlan.mac  rcvdPkFromLL:vector(packetBytes)  ETV
+attr interpolationmode  none
+attr source  packetReceivedFromLower
+attr title  "packets received from lower layer, vector(packetBytes)"
+vector 52  WirelessNetwork.cliHost[5].wlan.mac  passedUpPk:vector(packetBytes)  ETV
+attr interpolationmode  none
+attr source  packetSentToUpper
+attr title  "packets passed to higher layer, vector(packetBytes)"
+vector 34  WirelessNetwork.cliHost[3].wlan.mac  rcvdPkFromHL:vector(packetBytes)  ETV
+attr interpolationmode  none
+attr source  packetReceivedFromUpper
+attr title  "packets received from higher layer, vector(packetBytes)"
+vector 44  WirelessNetwork.cliHost[4].wlan.mac  rcvdPkFromHL:vector(packetBytes)  ETV
+attr interpolationmode  none
+attr source  packetReceivedFromUpper
+attr title  "packets received from higher layer, vector(packetBytes)"
+vector 54  WirelessNetwork.cliHost[5].wlan.mac  rcvdPkFromHL:vector(packetBytes)  ETV
+attr interpolationmode  none
+attr source  packetReceivedFromUpper
+attr title  "packets received from higher layer, vector(packetBytes)"
+vector 33  WirelessNetwork.cliHost[3].wlan.mac  sentDownPk:vector(packetBytes)  ETV
+attr interpolationmode  none
+attr source  packetSentToLower
+attr title  "packets sent to lower layer, vector(packetBytes)"
+vector 43  WirelessNetwork.cliHost[4].wlan.mac  sentDownPk:vector(packetBytes)  ETV
+attr interpolationmode  none
+attr source  packetSentToLower
+attr title  "packets sent to lower layer, vector(packetBytes)"
+vector 53  WirelessNetwork.cliHost[5].wlan.mac  sentDownPk:vector(packetBytes)  ETV
+attr interpolationmode  none
+attr source  packetSentToLower
+attr title  "packets sent to lower layer, vector(packetBytes)"
+vector 77  WirelessNetwork.cliHost[2].wlan.radio  snirVector  ETV
+vector 25  WirelessNetwork.cliHost[2].wlan.mac  rcvdPkFromLL:vector(packetBytes)  ETV
+attr interpolationmode  none
+attr source  packetReceivedFromLower
+attr title  "packets received from lower layer, vector(packetBytes)"
+0	10937 8 0 0 0 0 1 0 0 0 0
+2	10945 26 323 323 5.008556577748 5.008556577748 1 1042 1042 1042 1085764
+5	10971 52 323 558 5.008556577748 8.008556333563 2 1042 1042 2084 2171528
+6	11023 15 0 0 0 0 1 11000000 11000000 11000000 1.21e+14
+7	11038 8 0 0 0 0 1 0 0 0 0
+8	11046 77 0 534 0 8.000028333564 4 0 1 2 2
+10	11123 9 0 0 0 0 1 0 0 0 0
+12	11132 27 315 315 5.008556333563 5.008556333563 1 1042 1042 1042 1085764
+15	11159 27 315 315 5.008556333563 5.008556333563 1 1042 1042 1042 1085764
+16	11186 16 0 0 0 0 1 11000000 11000000 11000000 1.21e+14
+17	11202 9 0 0 0 0 1 0 0 0 0
+18	11211 81 0 536 0 8.000028577749 4 0 1 2 2
+20	11292 9 0 0 0 0 1 0 0 0 0
+23	11301 21 304 304 5.000028 5.000028 1 1042 1042 1042 1085764
+24	11322 14 303 303 5 5 1 1042 1042 1042 1085764
+25	11336 27 557 557 8.008556333563 8.008556333563 1 1042 1042 1042 1085764
+26	11363 16 0 0 0 0 1 11000000 11000000 11000000 1.21e+14
+27	11379 9 0 0 0 0 1 0 0 0 0
+28	11388 75 0 530 0 8.000028333564 4 0 2 3 5
+30	11463 9 0 0 0 0 1 0 0 0 0
+32	11472 27 316 316 5.008556333563 5.008556333563 1 1042 1042 1042 1085764
+33	11499 21 524 524 8.000028 8.000028 1 1042 1042 1042 1085764
+34	11520 14 521 521 8 8 1 1042 1042 1042 1085764
+35	11534 27 316 316 5.008556333563 5.008556333563 1 1042 1042 1042 1085764
+36	11561 16 0 0 0 0 1 11000000 11000000 11000000 1.21e+14
+37	11577 9 0 0 0 0 1 0 0 0 0
+38	11586 99 0 548 0 8.008555999999 5 0 2 4 6
+40	11685 9 0 0 0 0 1 0 0 0 0
+42	11694 27 324 324 5.008556577748 5.008556577748 1 1042 1042 1042 1085764
+43	11721 21 525 525 8.000028 8.000028 1 1042 1042 1042 1085764
+44	11742 14 522 522 8 8 1 1042 1042 1042 1085764
+45	11756 27 324 324 5.008556577748 5.008556577748 1 1042 1042 1042 1085764
+46	11783 16 0 0 0 0 1 11000000 11000000 11000000 1.21e+14
+47	11799 9 0 0 0 0 1 0 0 0 0
+48	11808 123 0 556 0 8.008556333563 6 0 2 4 6
+50	11931 9 0 0 0 0 1 0 0 0 0
+52	11940 27 330 330 5.008556667127 5.008556667127 1 1042 1042 1042 1085764
+53	11967 21 526 526 8.000028 8.000028 1 1042 1042 1042 1085764
+54	11988 14 523 523 8 8 1 1042 1042 1042 1085764
+55	12002 27 330 330 5.008556667127 5.008556667127 1 1042 1042 1042 1085764
+56	12029 16 0 0 0 0 1 11000000 11000000 11000000 1.21e+14
+57	12045 9 0 0 0 0 1 0 0 0 0
+58	12054 99 0 550 0 8.008555999999 5 0 2 4 6
+60	12153 258 0 558 0 8.008556333563 12 0 0 0 0
+61	12411 162 0 534 0 8.000028333564 8 0 1 3 3
+63	12573 48 308 534 5.000028577749 8.000028333564 2 0 0 0 0
+65	12621 38 321 321 5.008556577748 5.008556577748 1 38.187079353328 38.187079353328 38.187079353328 1458.2530295373
+66	12659 210 0 536 0 8.000028577749 10 0 0 0 0
+67	12869 162 0 536 0 8.000028577749 8 0 1 3 3
+69	13031 48 306 536 5.000028333564 8.000028577749 2 0 0 0 0
+71	13079 38 313 313 5.008556333563 5.008556333563 1 42.958291900524 42.958291900524 42.958291900524 1845.4148430107
+72	13117 400 0 557 0 8.008556333563 20 0 5 36 136
+73	13517 150 0 530 0 8.000028333564 8 0 2 5 9
+75	13667 49 303 530 5 8.000028333564 2 0 2778.6404237379 2778.6404237379 7720842.6044304
+77	13716 38 551 551 8.008556333563 8.008556333563 1 2.3404553396279 2.3404553396279 2.3404553396279 5.4777311967926
+78	13754 352 0 548 0 8.008555999999 18 0 5 27 111
+79	14106 198 0 548 0 8.008555999999 10 0 2 7 11
+81	14304 35 307 521 5.000028333564 8 2 0 0 0 0
+83	14339 38 314 314 5.008556333563 5.008556333563 1 42.958291900524 42.958291900524 42.958291900524 1845.4148430107
+84	14377 400 0 556 0 8.008556333563 20 0 5 30 116
+85	14777 246 0 556 0 8.008556333563 12 0 2 8 12
+87	15023 35 309 522 5.000028577749 8 2 0 0 0 0
+89	15058 38 322 322 5.008556577748 5.008556577748 1 38.187079353328 38.187079353328 38.187079353328 1458.2530295373
+90	15096 352 0 550 0 8.008555999999 18 0 5 27 111
+91	15448 198 0 550 0 8.008555999999 10 0 2 7 11
+93	15646 35 310 523 5.000028667128 8 2 0 0 0 0
+95	15681 38 329 329 5.008556667127 5.008556667127 1 36.937691987245 36.937691987245 36.937691987245 1364.3930893446

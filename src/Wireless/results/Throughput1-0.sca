@@ -1,0 +1,749 @@
+version 2
+run Throughput1-0-20150223-17:50:26-5767
+attr configname Throughput1
+attr datetime 20150223-17:50:26
+attr experiment Throughput1
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvars2 $repetition=0
+attr measurement ""
+attr network WirelessNetwork
+attr processid 5767
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+
+scalar WirelessNetwork.cliHost[0].wlan.mgmt 	dataQueueLen:max 	0
+attr interpolationmode  sample-hold
+attr title  "data queue length, max"
+scalar WirelessNetwork.cliHost[0].wlan.mgmt 	dataQueueLen:timeavg 	0
+attr interpolationmode  sample-hold
+attr title  "data queue length, timeavg"
+scalar WirelessNetwork.cliHost[0].wlan.mgmt 	dropPkByQueue:count 	0
+attr interpolationmode  none
+attr source  dropPkByQueue
+attr title  "packets dropped by queue, count"
+scalar WirelessNetwork.cliHost[0].wlan.mgmt 	dropPkByQueue:sum(packetBytes) 	0
+attr interpolationmode  none
+attr source  dropPkByQueue
+attr title  "packets dropped by queue, sum(packetBytes)"
+scalar WirelessNetwork.cliHost[0].wlan.mac 	"number of received packets" 	0
+scalar WirelessNetwork.cliHost[0].wlan.mac 	"number of collisions" 	1
+scalar WirelessNetwork.cliHost[0].wlan.mac 	"number of internal collisions" 	0
+scalar WirelessNetwork.cliHost[0].wlan.mac 	"number of retry for AC 0" 	0
+scalar WirelessNetwork.cliHost[0].wlan.mac 	"sent and received bits" 	0
+scalar WirelessNetwork.cliHost[0].wlan.mac 	"sent packet within AC 0" 	0
+scalar WirelessNetwork.cliHost[0].wlan.mac 	"sent in TXOP " 	0
+scalar WirelessNetwork.cliHost[0].wlan.mac 	"sentWithoutRetry AC 0" 	0
+scalar WirelessNetwork.cliHost[0].wlan.mac 	"numGivenUp AC 0" 	0
+scalar WirelessNetwork.cliHost[0].wlan.mac 	"numDropped AC 0" 	0
+scalar WirelessNetwork.cliHost[0].wlan.mac 	rcvdPkFromHL:count 	0
+attr interpolationmode  none
+attr source  packetReceivedFromUpper
+attr title  "packets received from higher layer, count"
+scalar WirelessNetwork.cliHost[0].wlan.mac 	rcvdPkFromHL:sum(packetBytes) 	0
+attr interpolationmode  none
+attr source  packetReceivedFromUpper
+attr title  "packets received from higher layer, sum(packetBytes)"
+scalar WirelessNetwork.cliHost[0].wlan.mac 	passedUpPk:count 	1
+attr interpolationmode  none
+attr source  packetSentToUpper
+attr title  "packets passed to higher layer, count"
+scalar WirelessNetwork.cliHost[0].wlan.mac 	passedUpPk:sum(packetBytes) 	1042
+attr interpolationmode  none
+attr source  packetSentToUpper
+attr title  "packets passed to higher layer, sum(packetBytes)"
+scalar WirelessNetwork.cliHost[0].wlan.mac 	rcvdPkFromLL:count 	2
+attr interpolationmode  none
+attr source  packetReceivedFromLower
+attr title  "packets received from lower layer, count"
+scalar WirelessNetwork.cliHost[0].wlan.mac 	rcvdPkFromLL:sum(packetBytes) 	2084
+attr interpolationmode  none
+attr source  packetReceivedFromLower
+attr title  "packets received from lower layer, sum(packetBytes)"
+scalar WirelessNetwork.cliHost[0].wlan.mac 	sentDownPk:count 	0
+attr interpolationmode  none
+attr source  packetSentToLower
+attr title  "packets sent to lower layer, count"
+scalar WirelessNetwork.cliHost[0].wlan.mac 	sentDownPk:sum(packetBytes) 	0
+attr interpolationmode  none
+attr source  packetSentToLower
+attr title  "packets sent to lower layer, sum(packetBytes)"
+scalar WirelessNetwork.cliHost[0].wlan.radio 	lossRate:min 	-nan
+attr interpolationmode  backward-sample-hold
+attr title  "packet loss rate, min"
+scalar WirelessNetwork.cliHost[0].wlan.radio 	lossRate:max 	-nan
+attr interpolationmode  backward-sample-hold
+attr title  "packet loss rate, max"
+scalar WirelessNetwork.cliHost[0].wlan.radio 	lossRate:timeavg 	-nan
+attr interpolationmode  backward-sample-hold
+attr title  "packet loss rate, timeavg"
+statistic WirelessNetwork.cliHost[0].wlan.radio 	channelNo:histogram
+field count 1
+field mean 0
+field stddev -nan
+field sum 0
+field sqrsum 0
+field min 0
+field max 0
+attr interpolationmode  sample-hold
+attr title  "channel no, histogram"
+bin	-INF	0
+bin	-0.5	0
+bin	-0.46666666666667	0
+bin	-0.43333333333333	0
+bin	-0.4	0
+bin	-0.36666666666667	0
+bin	-0.33333333333333	0
+bin	-0.3	0
+bin	-0.26666666666667	0
+bin	-0.23333333333333	0
+bin	-0.2	0
+bin	-0.16666666666667	0
+bin	-0.13333333333333	0
+bin	-0.1	0
+bin	-0.066666666666667	0
+bin	-0.033333333333333	0
+bin	0	1
+bin	0.033333333333333	0
+bin	0.066666666666667	0
+bin	0.1	0
+bin	0.13333333333333	0
+bin	0.16666666666667	0
+bin	0.2	0
+bin	0.23333333333333	0
+bin	0.26666666666667	0
+bin	0.3	0
+bin	0.33333333333333	0
+bin	0.36666666666667	0
+bin	0.4	0
+bin	0.43333333333333	0
+bin	0.46666666666667	0
+bin	0.5	0
+scalar WirelessNetwork.cliHost[0].wlan.radio 	bitrate:min 	11000000
+attr interpolationmode  sample-hold
+attr title  "tx bitrate, min"
+attr unit  bps
+scalar WirelessNetwork.cliHost[0].wlan.radio 	bitrate:max 	11000000
+attr interpolationmode  sample-hold
+attr title  "tx bitrate, max"
+attr unit  bps
+scalar WirelessNetwork.cliHost[0].wlan.radio 	bitrate:timeavg 	11000000
+attr interpolationmode  sample-hold
+attr title  "tx bitrate, timeavg"
+attr unit  bps
+scalar WirelessNetwork.cliHost[0].wlan.radio 	radioState:count 	4
+attr interpolationmode  sample-hold
+attr title  "radio state (enum), count"
+scalar WirelessNetwork.cliHost[1].wlan.mgmt 	dataQueueLen:max 	0
+attr interpolationmode  sample-hold
+attr title  "data queue length, max"
+scalar WirelessNetwork.cliHost[1].wlan.mgmt 	dataQueueLen:timeavg 	0
+attr interpolationmode  sample-hold
+attr title  "data queue length, timeavg"
+scalar WirelessNetwork.cliHost[1].wlan.mgmt 	dropPkByQueue:count 	0
+attr interpolationmode  none
+attr source  dropPkByQueue
+attr title  "packets dropped by queue, count"
+scalar WirelessNetwork.cliHost[1].wlan.mgmt 	dropPkByQueue:sum(packetBytes) 	0
+attr interpolationmode  none
+attr source  dropPkByQueue
+attr title  "packets dropped by queue, sum(packetBytes)"
+scalar WirelessNetwork.cliHost[1].wlan.mac 	"number of received packets" 	0
+scalar WirelessNetwork.cliHost[1].wlan.mac 	"number of collisions" 	0
+scalar WirelessNetwork.cliHost[1].wlan.mac 	"number of internal collisions" 	0
+scalar WirelessNetwork.cliHost[1].wlan.mac 	"number of retry for AC 0" 	0
+scalar WirelessNetwork.cliHost[1].wlan.mac 	"sent and received bits" 	0
+scalar WirelessNetwork.cliHost[1].wlan.mac 	"sent packet within AC 0" 	0
+scalar WirelessNetwork.cliHost[1].wlan.mac 	"sent in TXOP " 	0
+scalar WirelessNetwork.cliHost[1].wlan.mac 	"sentWithoutRetry AC 0" 	0
+scalar WirelessNetwork.cliHost[1].wlan.mac 	"numGivenUp AC 0" 	0
+scalar WirelessNetwork.cliHost[1].wlan.mac 	"numDropped AC 0" 	0
+scalar WirelessNetwork.cliHost[1].wlan.mac 	rcvdPkFromHL:count 	0
+attr interpolationmode  none
+attr source  packetReceivedFromUpper
+attr title  "packets received from higher layer, count"
+scalar WirelessNetwork.cliHost[1].wlan.mac 	rcvdPkFromHL:sum(packetBytes) 	0
+attr interpolationmode  none
+attr source  packetReceivedFromUpper
+attr title  "packets received from higher layer, sum(packetBytes)"
+scalar WirelessNetwork.cliHost[1].wlan.mac 	passedUpPk:count 	1
+attr interpolationmode  none
+attr source  packetSentToUpper
+attr title  "packets passed to higher layer, count"
+scalar WirelessNetwork.cliHost[1].wlan.mac 	passedUpPk:sum(packetBytes) 	1042
+attr interpolationmode  none
+attr source  packetSentToUpper
+attr title  "packets passed to higher layer, sum(packetBytes)"
+scalar WirelessNetwork.cliHost[1].wlan.mac 	rcvdPkFromLL:count 	1
+attr interpolationmode  none
+attr source  packetReceivedFromLower
+attr title  "packets received from lower layer, count"
+scalar WirelessNetwork.cliHost[1].wlan.mac 	rcvdPkFromLL:sum(packetBytes) 	1042
+attr interpolationmode  none
+attr source  packetReceivedFromLower
+attr title  "packets received from lower layer, sum(packetBytes)"
+scalar WirelessNetwork.cliHost[1].wlan.mac 	sentDownPk:count 	0
+attr interpolationmode  none
+attr source  packetSentToLower
+attr title  "packets sent to lower layer, count"
+scalar WirelessNetwork.cliHost[1].wlan.mac 	sentDownPk:sum(packetBytes) 	0
+attr interpolationmode  none
+attr source  packetSentToLower
+attr title  "packets sent to lower layer, sum(packetBytes)"
+scalar WirelessNetwork.cliHost[1].wlan.radio 	lossRate:min 	-nan
+attr interpolationmode  backward-sample-hold
+attr title  "packet loss rate, min"
+scalar WirelessNetwork.cliHost[1].wlan.radio 	lossRate:max 	-nan
+attr interpolationmode  backward-sample-hold
+attr title  "packet loss rate, max"
+scalar WirelessNetwork.cliHost[1].wlan.radio 	lossRate:timeavg 	-nan
+attr interpolationmode  backward-sample-hold
+attr title  "packet loss rate, timeavg"
+statistic WirelessNetwork.cliHost[1].wlan.radio 	channelNo:histogram
+field count 1
+field mean 0
+field stddev -nan
+field sum 0
+field sqrsum 0
+field min 0
+field max 0
+attr interpolationmode  sample-hold
+attr title  "channel no, histogram"
+bin	-INF	0
+bin	-0.5	0
+bin	-0.46666666666667	0
+bin	-0.43333333333333	0
+bin	-0.4	0
+bin	-0.36666666666667	0
+bin	-0.33333333333333	0
+bin	-0.3	0
+bin	-0.26666666666667	0
+bin	-0.23333333333333	0
+bin	-0.2	0
+bin	-0.16666666666667	0
+bin	-0.13333333333333	0
+bin	-0.1	0
+bin	-0.066666666666667	0
+bin	-0.033333333333333	0
+bin	0	1
+bin	0.033333333333333	0
+bin	0.066666666666667	0
+bin	0.1	0
+bin	0.13333333333333	0
+bin	0.16666666666667	0
+bin	0.2	0
+bin	0.23333333333333	0
+bin	0.26666666666667	0
+bin	0.3	0
+bin	0.33333333333333	0
+bin	0.36666666666667	0
+bin	0.4	0
+bin	0.43333333333333	0
+bin	0.46666666666667	0
+bin	0.5	0
+scalar WirelessNetwork.cliHost[1].wlan.radio 	bitrate:min 	11000000
+attr interpolationmode  sample-hold
+attr title  "tx bitrate, min"
+attr unit  bps
+scalar WirelessNetwork.cliHost[1].wlan.radio 	bitrate:max 	11000000
+attr interpolationmode  sample-hold
+attr title  "tx bitrate, max"
+attr unit  bps
+scalar WirelessNetwork.cliHost[1].wlan.radio 	bitrate:timeavg 	11000000
+attr interpolationmode  sample-hold
+attr title  "tx bitrate, timeavg"
+attr unit  bps
+scalar WirelessNetwork.cliHost[1].wlan.radio 	radioState:count 	4
+attr interpolationmode  sample-hold
+attr title  "radio state (enum), count"
+scalar WirelessNetwork.cliHost[2].wlan.mgmt 	dataQueueLen:max 	0
+attr interpolationmode  sample-hold
+attr title  "data queue length, max"
+scalar WirelessNetwork.cliHost[2].wlan.mgmt 	dataQueueLen:timeavg 	0
+attr interpolationmode  sample-hold
+attr title  "data queue length, timeavg"
+scalar WirelessNetwork.cliHost[2].wlan.mgmt 	dropPkByQueue:count 	0
+attr interpolationmode  none
+attr source  dropPkByQueue
+attr title  "packets dropped by queue, count"
+scalar WirelessNetwork.cliHost[2].wlan.mgmt 	dropPkByQueue:sum(packetBytes) 	0
+attr interpolationmode  none
+attr source  dropPkByQueue
+attr title  "packets dropped by queue, sum(packetBytes)"
+scalar WirelessNetwork.cliHost[2].wlan.mac 	"number of received packets" 	0
+scalar WirelessNetwork.cliHost[2].wlan.mac 	"number of collisions" 	1
+scalar WirelessNetwork.cliHost[2].wlan.mac 	"number of internal collisions" 	0
+scalar WirelessNetwork.cliHost[2].wlan.mac 	"number of retry for AC 0" 	0
+scalar WirelessNetwork.cliHost[2].wlan.mac 	"sent and received bits" 	8336
+scalar WirelessNetwork.cliHost[2].wlan.mac 	"sent packet within AC 0" 	0
+scalar WirelessNetwork.cliHost[2].wlan.mac 	"sent in TXOP " 	0
+scalar WirelessNetwork.cliHost[2].wlan.mac 	"sentWithoutRetry AC 0" 	0
+scalar WirelessNetwork.cliHost[2].wlan.mac 	"numGivenUp AC 0" 	0
+scalar WirelessNetwork.cliHost[2].wlan.mac 	"numDropped AC 0" 	0
+scalar WirelessNetwork.cliHost[2].wlan.mac 	rcvdPkFromHL:count 	1
+attr interpolationmode  none
+attr source  packetReceivedFromUpper
+attr title  "packets received from higher layer, count"
+scalar WirelessNetwork.cliHost[2].wlan.mac 	rcvdPkFromHL:sum(packetBytes) 	1042
+attr interpolationmode  none
+attr source  packetReceivedFromUpper
+attr title  "packets received from higher layer, sum(packetBytes)"
+scalar WirelessNetwork.cliHost[2].wlan.mac 	passedUpPk:count 	0
+attr interpolationmode  none
+attr source  packetSentToUpper
+attr title  "packets passed to higher layer, count"
+scalar WirelessNetwork.cliHost[2].wlan.mac 	passedUpPk:sum(packetBytes) 	0
+attr interpolationmode  none
+attr source  packetSentToUpper
+attr title  "packets passed to higher layer, sum(packetBytes)"
+scalar WirelessNetwork.cliHost[2].wlan.mac 	rcvdPkFromLL:count 	1
+attr interpolationmode  none
+attr source  packetReceivedFromLower
+attr title  "packets received from lower layer, count"
+scalar WirelessNetwork.cliHost[2].wlan.mac 	rcvdPkFromLL:sum(packetBytes) 	1042
+attr interpolationmode  none
+attr source  packetReceivedFromLower
+attr title  "packets received from lower layer, sum(packetBytes)"
+scalar WirelessNetwork.cliHost[2].wlan.mac 	sentDownPk:count 	1
+attr interpolationmode  none
+attr source  packetSentToLower
+attr title  "packets sent to lower layer, count"
+scalar WirelessNetwork.cliHost[2].wlan.mac 	sentDownPk:sum(packetBytes) 	1042
+attr interpolationmode  none
+attr source  packetSentToLower
+attr title  "packets sent to lower layer, sum(packetBytes)"
+scalar WirelessNetwork.cliHost[2].wlan.radio 	lossRate:min 	-nan
+attr interpolationmode  backward-sample-hold
+attr title  "packet loss rate, min"
+scalar WirelessNetwork.cliHost[2].wlan.radio 	lossRate:max 	-nan
+attr interpolationmode  backward-sample-hold
+attr title  "packet loss rate, max"
+scalar WirelessNetwork.cliHost[2].wlan.radio 	lossRate:timeavg 	-nan
+attr interpolationmode  backward-sample-hold
+attr title  "packet loss rate, timeavg"
+statistic WirelessNetwork.cliHost[2].wlan.radio 	channelNo:histogram
+field count 1
+field mean 0
+field stddev -nan
+field sum 0
+field sqrsum 0
+field min 0
+field max 0
+attr interpolationmode  sample-hold
+attr title  "channel no, histogram"
+bin	-INF	0
+bin	-0.5	0
+bin	-0.46666666666667	0
+bin	-0.43333333333333	0
+bin	-0.4	0
+bin	-0.36666666666667	0
+bin	-0.33333333333333	0
+bin	-0.3	0
+bin	-0.26666666666667	0
+bin	-0.23333333333333	0
+bin	-0.2	0
+bin	-0.16666666666667	0
+bin	-0.13333333333333	0
+bin	-0.1	0
+bin	-0.066666666666667	0
+bin	-0.033333333333333	0
+bin	0	1
+bin	0.033333333333333	0
+bin	0.066666666666667	0
+bin	0.1	0
+bin	0.13333333333333	0
+bin	0.16666666666667	0
+bin	0.2	0
+bin	0.23333333333333	0
+bin	0.26666666666667	0
+bin	0.3	0
+bin	0.33333333333333	0
+bin	0.36666666666667	0
+bin	0.4	0
+bin	0.43333333333333	0
+bin	0.46666666666667	0
+bin	0.5	0
+scalar WirelessNetwork.cliHost[2].wlan.radio 	bitrate:min 	11000000
+attr interpolationmode  sample-hold
+attr title  "tx bitrate, min"
+attr unit  bps
+scalar WirelessNetwork.cliHost[2].wlan.radio 	bitrate:max 	11000000
+attr interpolationmode  sample-hold
+attr title  "tx bitrate, max"
+attr unit  bps
+scalar WirelessNetwork.cliHost[2].wlan.radio 	bitrate:timeavg 	11000000
+attr interpolationmode  sample-hold
+attr title  "tx bitrate, timeavg"
+attr unit  bps
+scalar WirelessNetwork.cliHost[2].wlan.radio 	radioState:count 	4
+attr interpolationmode  sample-hold
+attr title  "radio state (enum), count"
+scalar WirelessNetwork.cliHost[3].wlan.mgmt 	dataQueueLen:max 	0
+attr interpolationmode  sample-hold
+attr title  "data queue length, max"
+scalar WirelessNetwork.cliHost[3].wlan.mgmt 	dataQueueLen:timeavg 	0
+attr interpolationmode  sample-hold
+attr title  "data queue length, timeavg"
+scalar WirelessNetwork.cliHost[3].wlan.mgmt 	dropPkByQueue:count 	0
+attr interpolationmode  none
+attr source  dropPkByQueue
+attr title  "packets dropped by queue, count"
+scalar WirelessNetwork.cliHost[3].wlan.mgmt 	dropPkByQueue:sum(packetBytes) 	0
+attr interpolationmode  none
+attr source  dropPkByQueue
+attr title  "packets dropped by queue, sum(packetBytes)"
+scalar WirelessNetwork.cliHost[3].wlan.mac 	"number of received packets" 	0
+scalar WirelessNetwork.cliHost[3].wlan.mac 	"number of collisions" 	0
+scalar WirelessNetwork.cliHost[3].wlan.mac 	"number of internal collisions" 	0
+scalar WirelessNetwork.cliHost[3].wlan.mac 	"number of retry for AC 0" 	0
+scalar WirelessNetwork.cliHost[3].wlan.mac 	"sent and received bits" 	8336
+scalar WirelessNetwork.cliHost[3].wlan.mac 	"sent packet within AC 0" 	0
+scalar WirelessNetwork.cliHost[3].wlan.mac 	"sent in TXOP " 	0
+scalar WirelessNetwork.cliHost[3].wlan.mac 	"sentWithoutRetry AC 0" 	0
+scalar WirelessNetwork.cliHost[3].wlan.mac 	"numGivenUp AC 0" 	0
+scalar WirelessNetwork.cliHost[3].wlan.mac 	"numDropped AC 0" 	0
+scalar WirelessNetwork.cliHost[3].wlan.mac 	rcvdPkFromHL:count 	1
+attr interpolationmode  none
+attr source  packetReceivedFromUpper
+attr title  "packets received from higher layer, count"
+scalar WirelessNetwork.cliHost[3].wlan.mac 	rcvdPkFromHL:sum(packetBytes) 	1042
+attr interpolationmode  none
+attr source  packetReceivedFromUpper
+attr title  "packets received from higher layer, sum(packetBytes)"
+scalar WirelessNetwork.cliHost[3].wlan.mac 	passedUpPk:count 	1
+attr interpolationmode  none
+attr source  packetSentToUpper
+attr title  "packets passed to higher layer, count"
+scalar WirelessNetwork.cliHost[3].wlan.mac 	passedUpPk:sum(packetBytes) 	1042
+attr interpolationmode  none
+attr source  packetSentToUpper
+attr title  "packets passed to higher layer, sum(packetBytes)"
+scalar WirelessNetwork.cliHost[3].wlan.mac 	rcvdPkFromLL:count 	1
+attr interpolationmode  none
+attr source  packetReceivedFromLower
+attr title  "packets received from lower layer, count"
+scalar WirelessNetwork.cliHost[3].wlan.mac 	rcvdPkFromLL:sum(packetBytes) 	1042
+attr interpolationmode  none
+attr source  packetReceivedFromLower
+attr title  "packets received from lower layer, sum(packetBytes)"
+scalar WirelessNetwork.cliHost[3].wlan.mac 	sentDownPk:count 	1
+attr interpolationmode  none
+attr source  packetSentToLower
+attr title  "packets sent to lower layer, count"
+scalar WirelessNetwork.cliHost[3].wlan.mac 	sentDownPk:sum(packetBytes) 	1042
+attr interpolationmode  none
+attr source  packetSentToLower
+attr title  "packets sent to lower layer, sum(packetBytes)"
+scalar WirelessNetwork.cliHost[3].wlan.radio 	lossRate:min 	-nan
+attr interpolationmode  backward-sample-hold
+attr title  "packet loss rate, min"
+scalar WirelessNetwork.cliHost[3].wlan.radio 	lossRate:max 	-nan
+attr interpolationmode  backward-sample-hold
+attr title  "packet loss rate, max"
+scalar WirelessNetwork.cliHost[3].wlan.radio 	lossRate:timeavg 	-nan
+attr interpolationmode  backward-sample-hold
+attr title  "packet loss rate, timeavg"
+statistic WirelessNetwork.cliHost[3].wlan.radio 	channelNo:histogram
+field count 1
+field mean 0
+field stddev -nan
+field sum 0
+field sqrsum 0
+field min 0
+field max 0
+attr interpolationmode  sample-hold
+attr title  "channel no, histogram"
+bin	-INF	0
+bin	-0.5	0
+bin	-0.46666666666667	0
+bin	-0.43333333333333	0
+bin	-0.4	0
+bin	-0.36666666666667	0
+bin	-0.33333333333333	0
+bin	-0.3	0
+bin	-0.26666666666667	0
+bin	-0.23333333333333	0
+bin	-0.2	0
+bin	-0.16666666666667	0
+bin	-0.13333333333333	0
+bin	-0.1	0
+bin	-0.066666666666667	0
+bin	-0.033333333333333	0
+bin	0	1
+bin	0.033333333333333	0
+bin	0.066666666666667	0
+bin	0.1	0
+bin	0.13333333333333	0
+bin	0.16666666666667	0
+bin	0.2	0
+bin	0.23333333333333	0
+bin	0.26666666666667	0
+bin	0.3	0
+bin	0.33333333333333	0
+bin	0.36666666666667	0
+bin	0.4	0
+bin	0.43333333333333	0
+bin	0.46666666666667	0
+bin	0.5	0
+scalar WirelessNetwork.cliHost[3].wlan.radio 	bitrate:min 	11000000
+attr interpolationmode  sample-hold
+attr title  "tx bitrate, min"
+attr unit  bps
+scalar WirelessNetwork.cliHost[3].wlan.radio 	bitrate:max 	11000000
+attr interpolationmode  sample-hold
+attr title  "tx bitrate, max"
+attr unit  bps
+scalar WirelessNetwork.cliHost[3].wlan.radio 	bitrate:timeavg 	11000000
+attr interpolationmode  sample-hold
+attr title  "tx bitrate, timeavg"
+attr unit  bps
+scalar WirelessNetwork.cliHost[3].wlan.radio 	radioState:count 	5
+attr interpolationmode  sample-hold
+attr title  "radio state (enum), count"
+scalar WirelessNetwork.cliHost[4].wlan.mgmt 	dataQueueLen:max 	0
+attr interpolationmode  sample-hold
+attr title  "data queue length, max"
+scalar WirelessNetwork.cliHost[4].wlan.mgmt 	dataQueueLen:timeavg 	0
+attr interpolationmode  sample-hold
+attr title  "data queue length, timeavg"
+scalar WirelessNetwork.cliHost[4].wlan.mgmt 	dropPkByQueue:count 	0
+attr interpolationmode  none
+attr source  dropPkByQueue
+attr title  "packets dropped by queue, count"
+scalar WirelessNetwork.cliHost[4].wlan.mgmt 	dropPkByQueue:sum(packetBytes) 	0
+attr interpolationmode  none
+attr source  dropPkByQueue
+attr title  "packets dropped by queue, sum(packetBytes)"
+scalar WirelessNetwork.cliHost[4].wlan.mac 	"number of received packets" 	0
+scalar WirelessNetwork.cliHost[4].wlan.mac 	"number of collisions" 	0
+scalar WirelessNetwork.cliHost[4].wlan.mac 	"number of internal collisions" 	0
+scalar WirelessNetwork.cliHost[4].wlan.mac 	"number of retry for AC 0" 	0
+scalar WirelessNetwork.cliHost[4].wlan.mac 	"sent and received bits" 	8336
+scalar WirelessNetwork.cliHost[4].wlan.mac 	"sent packet within AC 0" 	0
+scalar WirelessNetwork.cliHost[4].wlan.mac 	"sent in TXOP " 	0
+scalar WirelessNetwork.cliHost[4].wlan.mac 	"sentWithoutRetry AC 0" 	0
+scalar WirelessNetwork.cliHost[4].wlan.mac 	"numGivenUp AC 0" 	0
+scalar WirelessNetwork.cliHost[4].wlan.mac 	"numDropped AC 0" 	0
+scalar WirelessNetwork.cliHost[4].wlan.mac 	rcvdPkFromHL:count 	1
+attr interpolationmode  none
+attr source  packetReceivedFromUpper
+attr title  "packets received from higher layer, count"
+scalar WirelessNetwork.cliHost[4].wlan.mac 	rcvdPkFromHL:sum(packetBytes) 	1042
+attr interpolationmode  none
+attr source  packetReceivedFromUpper
+attr title  "packets received from higher layer, sum(packetBytes)"
+scalar WirelessNetwork.cliHost[4].wlan.mac 	passedUpPk:count 	1
+attr interpolationmode  none
+attr source  packetSentToUpper
+attr title  "packets passed to higher layer, count"
+scalar WirelessNetwork.cliHost[4].wlan.mac 	passedUpPk:sum(packetBytes) 	1042
+attr interpolationmode  none
+attr source  packetSentToUpper
+attr title  "packets passed to higher layer, sum(packetBytes)"
+scalar WirelessNetwork.cliHost[4].wlan.mac 	rcvdPkFromLL:count 	1
+attr interpolationmode  none
+attr source  packetReceivedFromLower
+attr title  "packets received from lower layer, count"
+scalar WirelessNetwork.cliHost[4].wlan.mac 	rcvdPkFromLL:sum(packetBytes) 	1042
+attr interpolationmode  none
+attr source  packetReceivedFromLower
+attr title  "packets received from lower layer, sum(packetBytes)"
+scalar WirelessNetwork.cliHost[4].wlan.mac 	sentDownPk:count 	1
+attr interpolationmode  none
+attr source  packetSentToLower
+attr title  "packets sent to lower layer, count"
+scalar WirelessNetwork.cliHost[4].wlan.mac 	sentDownPk:sum(packetBytes) 	1042
+attr interpolationmode  none
+attr source  packetSentToLower
+attr title  "packets sent to lower layer, sum(packetBytes)"
+scalar WirelessNetwork.cliHost[4].wlan.radio 	lossRate:min 	-nan
+attr interpolationmode  backward-sample-hold
+attr title  "packet loss rate, min"
+scalar WirelessNetwork.cliHost[4].wlan.radio 	lossRate:max 	-nan
+attr interpolationmode  backward-sample-hold
+attr title  "packet loss rate, max"
+scalar WirelessNetwork.cliHost[4].wlan.radio 	lossRate:timeavg 	-nan
+attr interpolationmode  backward-sample-hold
+attr title  "packet loss rate, timeavg"
+statistic WirelessNetwork.cliHost[4].wlan.radio 	channelNo:histogram
+field count 1
+field mean 0
+field stddev -nan
+field sum 0
+field sqrsum 0
+field min 0
+field max 0
+attr interpolationmode  sample-hold
+attr title  "channel no, histogram"
+bin	-INF	0
+bin	-0.5	0
+bin	-0.46666666666667	0
+bin	-0.43333333333333	0
+bin	-0.4	0
+bin	-0.36666666666667	0
+bin	-0.33333333333333	0
+bin	-0.3	0
+bin	-0.26666666666667	0
+bin	-0.23333333333333	0
+bin	-0.2	0
+bin	-0.16666666666667	0
+bin	-0.13333333333333	0
+bin	-0.1	0
+bin	-0.066666666666667	0
+bin	-0.033333333333333	0
+bin	0	1
+bin	0.033333333333333	0
+bin	0.066666666666667	0
+bin	0.1	0
+bin	0.13333333333333	0
+bin	0.16666666666667	0
+bin	0.2	0
+bin	0.23333333333333	0
+bin	0.26666666666667	0
+bin	0.3	0
+bin	0.33333333333333	0
+bin	0.36666666666667	0
+bin	0.4	0
+bin	0.43333333333333	0
+bin	0.46666666666667	0
+bin	0.5	0
+scalar WirelessNetwork.cliHost[4].wlan.radio 	bitrate:min 	11000000
+attr interpolationmode  sample-hold
+attr title  "tx bitrate, min"
+attr unit  bps
+scalar WirelessNetwork.cliHost[4].wlan.radio 	bitrate:max 	11000000
+attr interpolationmode  sample-hold
+attr title  "tx bitrate, max"
+attr unit  bps
+scalar WirelessNetwork.cliHost[4].wlan.radio 	bitrate:timeavg 	11000000
+attr interpolationmode  sample-hold
+attr title  "tx bitrate, timeavg"
+attr unit  bps
+scalar WirelessNetwork.cliHost[4].wlan.radio 	radioState:count 	6
+attr interpolationmode  sample-hold
+attr title  "radio state (enum), count"
+scalar WirelessNetwork.cliHost[5].wlan.mgmt 	dataQueueLen:max 	0
+attr interpolationmode  sample-hold
+attr title  "data queue length, max"
+scalar WirelessNetwork.cliHost[5].wlan.mgmt 	dataQueueLen:timeavg 	0
+attr interpolationmode  sample-hold
+attr title  "data queue length, timeavg"
+scalar WirelessNetwork.cliHost[5].wlan.mgmt 	dropPkByQueue:count 	0
+attr interpolationmode  none
+attr source  dropPkByQueue
+attr title  "packets dropped by queue, count"
+scalar WirelessNetwork.cliHost[5].wlan.mgmt 	dropPkByQueue:sum(packetBytes) 	0
+attr interpolationmode  none
+attr source  dropPkByQueue
+attr title  "packets dropped by queue, sum(packetBytes)"
+scalar WirelessNetwork.cliHost[5].wlan.mac 	"number of received packets" 	0
+scalar WirelessNetwork.cliHost[5].wlan.mac 	"number of collisions" 	0
+scalar WirelessNetwork.cliHost[5].wlan.mac 	"number of internal collisions" 	0
+scalar WirelessNetwork.cliHost[5].wlan.mac 	"number of retry for AC 0" 	0
+scalar WirelessNetwork.cliHost[5].wlan.mac 	"sent and received bits" 	8336
+scalar WirelessNetwork.cliHost[5].wlan.mac 	"sent packet within AC 0" 	0
+scalar WirelessNetwork.cliHost[5].wlan.mac 	"sent in TXOP " 	0
+scalar WirelessNetwork.cliHost[5].wlan.mac 	"sentWithoutRetry AC 0" 	0
+scalar WirelessNetwork.cliHost[5].wlan.mac 	"numGivenUp AC 0" 	0
+scalar WirelessNetwork.cliHost[5].wlan.mac 	"numDropped AC 0" 	0
+scalar WirelessNetwork.cliHost[5].wlan.mac 	rcvdPkFromHL:count 	1
+attr interpolationmode  none
+attr source  packetReceivedFromUpper
+attr title  "packets received from higher layer, count"
+scalar WirelessNetwork.cliHost[5].wlan.mac 	rcvdPkFromHL:sum(packetBytes) 	1042
+attr interpolationmode  none
+attr source  packetReceivedFromUpper
+attr title  "packets received from higher layer, sum(packetBytes)"
+scalar WirelessNetwork.cliHost[5].wlan.mac 	passedUpPk:count 	1
+attr interpolationmode  none
+attr source  packetSentToUpper
+attr title  "packets passed to higher layer, count"
+scalar WirelessNetwork.cliHost[5].wlan.mac 	passedUpPk:sum(packetBytes) 	1042
+attr interpolationmode  none
+attr source  packetSentToUpper
+attr title  "packets passed to higher layer, sum(packetBytes)"
+scalar WirelessNetwork.cliHost[5].wlan.mac 	rcvdPkFromLL:count 	1
+attr interpolationmode  none
+attr source  packetReceivedFromLower
+attr title  "packets received from lower layer, count"
+scalar WirelessNetwork.cliHost[5].wlan.mac 	rcvdPkFromLL:sum(packetBytes) 	1042
+attr interpolationmode  none
+attr source  packetReceivedFromLower
+attr title  "packets received from lower layer, sum(packetBytes)"
+scalar WirelessNetwork.cliHost[5].wlan.mac 	sentDownPk:count 	1
+attr interpolationmode  none
+attr source  packetSentToLower
+attr title  "packets sent to lower layer, count"
+scalar WirelessNetwork.cliHost[5].wlan.mac 	sentDownPk:sum(packetBytes) 	1042
+attr interpolationmode  none
+attr source  packetSentToLower
+attr title  "packets sent to lower layer, sum(packetBytes)"
+scalar WirelessNetwork.cliHost[5].wlan.radio 	lossRate:min 	-nan
+attr interpolationmode  backward-sample-hold
+attr title  "packet loss rate, min"
+scalar WirelessNetwork.cliHost[5].wlan.radio 	lossRate:max 	-nan
+attr interpolationmode  backward-sample-hold
+attr title  "packet loss rate, max"
+scalar WirelessNetwork.cliHost[5].wlan.radio 	lossRate:timeavg 	-nan
+attr interpolationmode  backward-sample-hold
+attr title  "packet loss rate, timeavg"
+statistic WirelessNetwork.cliHost[5].wlan.radio 	channelNo:histogram
+field count 1
+field mean 0
+field stddev -nan
+field sum 0
+field sqrsum 0
+field min 0
+field max 0
+attr interpolationmode  sample-hold
+attr title  "channel no, histogram"
+bin	-INF	0
+bin	-0.5	0
+bin	-0.46666666666667	0
+bin	-0.43333333333333	0
+bin	-0.4	0
+bin	-0.36666666666667	0
+bin	-0.33333333333333	0
+bin	-0.3	0
+bin	-0.26666666666667	0
+bin	-0.23333333333333	0
+bin	-0.2	0
+bin	-0.16666666666667	0
+bin	-0.13333333333333	0
+bin	-0.1	0
+bin	-0.066666666666667	0
+bin	-0.033333333333333	0
+bin	0	1
+bin	0.033333333333333	0
+bin	0.066666666666667	0
+bin	0.1	0
+bin	0.13333333333333	0
+bin	0.16666666666667	0
+bin	0.2	0
+bin	0.23333333333333	0
+bin	0.26666666666667	0
+bin	0.3	0
+bin	0.33333333333333	0
+bin	0.36666666666667	0
+bin	0.4	0
+bin	0.43333333333333	0
+bin	0.46666666666667	0
+bin	0.5	0
+scalar WirelessNetwork.cliHost[5].wlan.radio 	bitrate:min 	11000000
+attr interpolationmode  sample-hold
+attr title  "tx bitrate, min"
+attr unit  bps
+scalar WirelessNetwork.cliHost[5].wlan.radio 	bitrate:max 	11000000
+attr interpolationmode  sample-hold
+attr title  "tx bitrate, max"
+attr unit  bps
+scalar WirelessNetwork.cliHost[5].wlan.radio 	bitrate:timeavg 	11000000
+attr interpolationmode  sample-hold
+attr title  "tx bitrate, timeavg"
+attr unit  bps
+scalar WirelessNetwork.cliHost[5].wlan.radio 	radioState:count 	5
+attr interpolationmode  sample-hold
+attr title  "radio state (enum), count"

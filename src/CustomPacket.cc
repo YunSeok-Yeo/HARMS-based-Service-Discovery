@@ -55,7 +55,7 @@ inline std::ostream& operator<<(std::ostream& out,const T&) {return out;}
 
 Register_Class(CustomPacket);
 
-CustomPacket::CustomPacket(const char *name, int kind) : ::cMessage(name,kind)
+CustomPacket::CustomPacket(const char *name, int kind) : ::cPacket(name,kind)
 {
     this->type = 0;
     this->sourceId = 0;
@@ -66,10 +66,11 @@ CustomPacket::CustomPacket(const char *name, int kind) : ::cMessage(name,kind)
     this->proxyId = 0;
     this->originSourceId = 0;
     this->originSourceSeqNum = 0;
+    this->hopCount = 0;
 
 }
 
-CustomPacket::CustomPacket(const CustomPacket& other) : ::cMessage(other) {
+CustomPacket::CustomPacket(const CustomPacket& other) : ::cPacket(other) {
     // TODO Auto-generated constructor stub
     copy(other);
 }
@@ -81,7 +82,7 @@ CustomPacket::~CustomPacket() {
 CustomPacket& CustomPacket::operator=(const CustomPacket& other)
 {
     if (this==&other) return *this;
-    ::cMessage::operator=(other);
+    ::cPacket::operator=(other);
     copy(other);
     return *this;
 }
@@ -98,11 +99,12 @@ void CustomPacket::copy(const CustomPacket& other)
     this->originSourceId = other.originSourceId;
     this->originSourceSeqNum = other.originSourceSeqNum;
     this->lastHop = other.lastHop;
+    this->hopCount = other.hopCount;
 }
 
 void CustomPacket::parsimPack(cCommBuffer *b)
 {
-    ::cMessage::parsimPack(b);
+    ::cPacket::parsimPack(b);
     doPacking(b,this->type);
     doPacking(b,this->sequenceNum);
     doPacking(b,this->sourceId);
@@ -113,11 +115,12 @@ void CustomPacket::parsimPack(cCommBuffer *b)
     doPacking(b,this->originSourceId);
     doPacking(b,this->originSourceSeqNum);
     doPacking(b,this->lastHop);
+    doPacking(b,this->hopCount);
 }
 
 void CustomPacket::parsimUnpack(cCommBuffer *b)
 {
-    ::cMessage::parsimUnpack(b);
+    ::cPacket::parsimUnpack(b);
     doUnpacking(b,this->type);
     doUnpacking(b,this->sequenceNum);
     doUnpacking(b,this->sourceId);
@@ -128,6 +131,7 @@ void CustomPacket::parsimUnpack(cCommBuffer *b)
     doUnpacking(b,this->originSourceId);
     doUnpacking(b,this->originSourceSeqNum);
     doUnpacking(b,this->lastHop);
+    doUnpacking(b,this->hopCount);
 }
 int CustomPacket::GetType() const
 {
@@ -251,7 +255,7 @@ class CustomPacketDescriptor : public cClassDescriptor
 
 Register_ClassDescriptor(CustomPacketDescriptor);
 
-CustomPacketDescriptor::CustomPacketDescriptor() : cClassDescriptor("CustomPacket", "cMessage")
+CustomPacketDescriptor::CustomPacketDescriptor() : cClassDescriptor("CustomPacket", "cPacket")
 {
 }
 
@@ -273,7 +277,7 @@ const char *CustomPacketDescriptor::getProperty(const char *propertyname) const
 int CustomPacketDescriptor::getFieldCount(void *object) const
 {
     cClassDescriptor *basedesc = getBaseClassDescriptor();
-    return basedesc ? 10+basedesc->getFieldCount(object) : 11;
+    return basedesc ? 11+basedesc->getFieldCount(object) : 11;
 }
 
 unsigned int CustomPacketDescriptor::getFieldTypeFlags(void *object, int field) const
@@ -298,7 +302,7 @@ unsigned int CustomPacketDescriptor::getFieldTypeFlags(void *object, int field) 
         FD_ISEDITABLE,
         FD_ISEDITABLE,
     };
-    return (field>=0 && field<10) ? fieldTypeFlags[field] : 0;
+    return (field>=0 && field<11) ? fieldTypeFlags[field] : 0;
 }
 
 const char *CustomPacketDescriptor::getFieldName(void *object, int field) const

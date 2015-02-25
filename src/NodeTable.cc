@@ -14,6 +14,7 @@
 // 
 
 #include <NodeTable.h>
+#include <sstream>
 
 NodeTable::NodeTable() {
     // TODO Auto-generated constructor stub
@@ -45,8 +46,19 @@ void NodeTable::UpdateEntry(int nodeId, int nodeService, int nodeLocation, int n
     e->nodeService = nodeService;
     e->nodeLifeTime = nodeLifeTime;
     e->nodeLocation = nodeLocation;
-
     table.push_back(e);
+}
+
+string NodeTable::GetEntries(){
+    stringstream out;
+    int len = table.size();
+    NodeEntry *e;
+    for( int i = 0 ; i < len ; i++ ){
+        e = table[i];
+        out << e->nodeId << "," << e->nodeService << "|";
+    }
+
+    return out.str();
 }
 
 

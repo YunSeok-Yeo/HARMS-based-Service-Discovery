@@ -30,8 +30,6 @@ void Server_DNS::handleMessage(cMessage *msg)
     CustomPacket *packet = check_and_cast<CustomPacket *>(msg);
 
     switch(packet->GetType()){
-    case HELLO:
-        Hello(packet);
     case QUERY:
         Query(packet);
         break;
@@ -50,18 +48,9 @@ CustomPacket* Server_DNS::GeneratePacket(const char* name, int destinationId, in
     newPacket->SetSeqNum(seqNum++);
     newPacket->SetType(type);
     newPacket->SetMaxHopCount(maxHopCount);
+    newPacket->SetHopCount(0);
 
     return newPacket;
-}
-void Server_DNS::Hello(CustomPacket *packet){
-    CustomPacket *reply = GeneratePacket("reply", packet->GetSource(), 0, REPLY, packet->GetHopCount() + 1);
-    stringstream out;
-
-    out << ID << "," << Service << "|"; //To reach destination service, Source should send packet to this node.
-    reply->SetLastHop(out.str());
-
-    int outGateId = gateBaseId("g$o") + packet->getArrivalGate()->getIndex();
-    send(reply, outGateId);
 }
 void Server_DNS::Query(CustomPacket *packet){
     int targetId;
@@ -71,6 +60,7 @@ void Server_DNS::Query(CustomPacket *packet){
 
         out << targetId << "," << packet->GetDestinationService() << "|"; //To reach destination service, Source should send packet to this node.
         reply->SetLastHop(out.str());
+        reply->setKind(2);
 
         int outGateId = gateBaseId("g$o") + packet->getArrivalGate()->getIndex();
         send(reply, outGateId);
@@ -84,8 +74,9 @@ void Server_DNS::Register(CustomPacket *packet){
     int Source = atoi(lastHop.substr(0, deliPos).c_str());
     int Service = atoi(lastHop.substr(deliPos + 1, lastHop.find("|") - deliPos - 1).c_str());
 
-    EV << "DNS -> " << Source << ":" << Service << "\n";
+    EV << "DNS register Source(" << Source << ") : Service(" << Service << ")\n";
     nodeTable.UpdateEntry(Source, Service, packet->GetLocation(), 10);
+    //reply->setKind(1);
 
     delete packet;
 }

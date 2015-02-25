@@ -13,10 +13,30 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package servicediscovery;
+#ifndef ROUTINGTABLE_H_
+#define ROUTINGTABLE_H_
 
+#include <vector>
+#include <string>
+#define MAX_ITMES 100
 
-module WifiNode{
- 	submodules:
- 	       
-}
+using namespace std;
+class CustomRoutingTable {
+    struct RoutingEntry{
+        int destinationId;
+        string nextHop;
+        int hopCount;
+    };
+    vector<RoutingEntry *> table;
+public:
+
+    CustomRoutingTable();
+    virtual ~CustomRoutingTable();
+
+    void UpdateEntry(int destinationId, string nextHop, int hopCount);
+    int GetTableSize();
+    string FindPath(int destination);
+    string GetEntries();
+};
+
+#endif /* ROUTINGTABLE_H_ */

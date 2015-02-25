@@ -33,7 +33,6 @@ class Server_DNS : public cSimpleModule
     virtual void Register(CustomPacket *packet);
     virtual void Query(CustomPacket *packet);
     virtual CustomPacket* GeneratePacket(const char* name, int destinationId, int destinationService, int type, int maxHopCount);
-    virtual void Hello(CustomPacket *packet);
     int ID, seqNum, Service;
 };
 

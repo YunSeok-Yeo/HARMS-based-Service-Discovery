@@ -18,9 +18,8 @@ package servicediscovery;
 
 simple PortableDevice
 {
-    parameters:
-        @display("i=device/wifilaptop;r=150");
     gates:
-        inout g[];
+        input in;
+        output out;
 
 }

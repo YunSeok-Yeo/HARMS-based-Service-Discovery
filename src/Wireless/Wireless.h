@@ -13,28 +13,22 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef ROUTINGTABLE_H_
-#define ROUTINGTABLE_H_
+#ifndef __SERVICEDISCOVERY_WIRELESSNODE_H_
+#define __SERVICEDISCOVERY_WIRELESSNODE_H_
 
-#include <vector>
-#define MAX_ITMES 100
+#include <omnetpp.h>
 
-using namespace std;
-class RoutingTable {
-    struct RoutingEntry{
-        int destinationId;
-        int nextHop;
-        int hopCount;
-    };
-    vector<RoutingEntry *> table;
-public:
-
-    RoutingTable();
-    virtual ~RoutingTable();
-
-    void UpdateEntry(int destinationId, int nextHop, int hopCount);
-    int GetTableSize();
-    int FindPath(int destination);
+/**
+ * TODO - Generated class
+ */
+class Wireless : public cSimpleModule
+{
+  protected:
+    virtual void initialize();
+    virtual void handleMessage(cMessage *msg);
+    void receivePacket(cPacket *msg);
+    static simsignal_t sentPkSignal;
+    static simsignal_t rcvdPkSignal;
 };
 
-#endif /* ROUTINGTABLE_H_ */
+#endif

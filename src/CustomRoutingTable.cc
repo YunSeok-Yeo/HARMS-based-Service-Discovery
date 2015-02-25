@@ -13,14 +13,14 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include <RoutingTable.h>
-#include <omnetpp.h>
-RoutingTable::RoutingTable() {
+#include "CustomRoutingTable.h"
+#include <sstream>
+CustomRoutingTable::CustomRoutingTable() {
     // TODO Auto-generated constructor stub
 
 }
 
-RoutingTable::~RoutingTable() {
+CustomRoutingTable::~CustomRoutingTable() {
     // TODO Auto-generated destructor stub
     int len = table.size();
     for(int i = 0; i < len; i++){
@@ -30,7 +30,7 @@ RoutingTable::~RoutingTable() {
 }
 
 // Compare with old path and Update entry
-void RoutingTable::UpdateEntry(int destinationId, int nextHop, int hopCount){
+void CustomRoutingTable::UpdateEntry(int destinationId, string nextHop, int hopCount){
     int len = table.size();
     RoutingEntry *e;
     for(int i = 0; i < len; i++){
@@ -49,8 +49,17 @@ void RoutingTable::UpdateEntry(int destinationId, int nextHop, int hopCount){
     e->hopCount = hopCount;
     table.push_back(e);
 }
-
-int RoutingTable::GetTableSize(){
+string CustomRoutingTable::GetEntries(){
+    stringstream out;
+    int len = table.size();
+    RoutingEntry *e;
+    for(int i = 0; i < len; i++){
+        e = table[i];
+        out << e->destinationId << "," << e->hopCount << "|";
+    }
+    return out.str();
+}
+int CustomRoutingTable::GetTableSize(){
     return table.size();
 }
 
@@ -60,7 +69,7 @@ int RoutingTable::GetTableSize(){
  *  Find entry that has destination
  *  Return next gateId
  */
-int RoutingTable::FindPath(int destination){
+string CustomRoutingTable::FindPath(int destination){
     int len = table.size();
     RoutingEntry *e;
     for(int i = 0; i < len; i++){
@@ -69,5 +78,6 @@ int RoutingTable::FindPath(int destination){
             return e->nextHop;
         }
     }
-    return -1;
+    string dump = "";
+    return dump;
 }

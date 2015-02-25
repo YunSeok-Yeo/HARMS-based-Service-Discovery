@@ -13,40 +13,41 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package servicediscovery;
+package servicediscovery.Wireless;
 
 import inet.base.NotificationBoard;
 import inet.linklayer.ieee80211.Ieee80211Nic;
 import inet.mobility.single.CircleMobility;
-import servicediscovery.Wireless.Wireless;
 
 
-module AP
+module WifiNode
 {
     parameters:
         @display("i=device/wifilaptop");
         @node();
     gates:
         input radioIn @directIn;
-        inout g;
 
     submodules:
         notificationBoard: NotificationBoard {
             parameters:
                 @display("p=52,70");
         }
+        cli: Wireless {
+            parameters:
+                @display("b=40,24;p=180,60,col");
+        }
         wlan: Ieee80211Nic {
             parameters:
                 @display("p=112,134;q=queue");
                 mgmtType = "Ieee80211MgmtAdhoc";
         }
-        cli: APCli {
+        mobility: CircleMobility {
             parameters:
-                @display("b=40,24;p=180,60,col");
+                @display("p=50,141");
         }
     connections allowunconnected:
         wlan.radioIn <-- radioIn;
         cli.out --> wlan.upperLayerIn;
         cli.in <-- wlan.upperLayerOut;
-        cli.g <--> g;
 }

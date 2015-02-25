@@ -2,7 +2,7 @@
 # OMNeT++/OMNEST Makefile for servicediscovery
 #
 # This file was generated with the command:
-#  opp_makemake -f --deep
+#  opp_makemake -f --deep -I../../inet/src/linklayer/ieee80211/radio -I../../inet/src/networklayer/routing/aodv -I../../inet/src/networklayer/common -I../../inet/src -I../../inet/src/networklayer/icmpv6 -I../../inet/src/world/obstacles -I../../inet/src/networklayer/xmipv6 -I../../inet/src/networklayer/contract -I../../inet/src/networklayer/autorouting/ipv4 -I../../inet/src/util -I../../inet/src/transport/contract -I../../inet/src/linklayer/common -I../../inet/src/status -I../../inet/src/linklayer/radio/propagation -I../../inet/src/linklayer/ieee80211/radio/errormodel -I../../inet/src/linklayer/radio -I../../inet/src/util/headerserializers/tcp -I../../inet/src/networklayer/ipv4 -I../../inet/src/mobility/contract -I../../inet/src/util/headerserializers/ipv4 -I../../inet/src/base -I../../inet/src/applications/ethernet -I../../inet/src/util/headerserializers -I../../inet/src/world/radio -I../../inet/src/linklayer/ieee80211/mac -I../../inet/src/networklayer/ipv6 -I../../inet/src/transport/sctp -I../../inet/src/util/headerserializers/udp -I../../inet/src/networklayer/ipv6tunneling -I../../inet/src/util/headerserializers/ipv6 -I../../inet/src/battery/models -I../../inet/src/applications/pingapp -I../../inet/src/util/headerserializers/sctp -I../../inet/src/linklayer/contract -I../../inet/src/networklayer/arp -I../../inet/src/transport/tcp_common -I../../inet/src/transport/udp -L../../inet/out/$$\(CONFIGNAME\)/src -linet -DINET_IMPORT -KINET_PROJ=../../inet
 #
 
 # Name of target to be created (-o option)
@@ -14,13 +14,54 @@ USERIF_LIBS = $(ALL_ENV_LIBS) # that is, $(TKENV_LIBS) $(CMDENV_LIBS)
 #USERIF_LIBS = $(TKENV_LIBS)
 
 # C++ include paths (with -I)
-INCLUDE_PATH = -I.
+INCLUDE_PATH = \
+    -I../../inet/src/linklayer/ieee80211/radio \
+    -I../../inet/src/networklayer/routing/aodv \
+    -I../../inet/src/networklayer/common \
+    -I../../inet/src \
+    -I../../inet/src/networklayer/icmpv6 \
+    -I../../inet/src/world/obstacles \
+    -I../../inet/src/networklayer/xmipv6 \
+    -I../../inet/src/networklayer/contract \
+    -I../../inet/src/networklayer/autorouting/ipv4 \
+    -I../../inet/src/util \
+    -I../../inet/src/transport/contract \
+    -I../../inet/src/linklayer/common \
+    -I../../inet/src/status \
+    -I../../inet/src/linklayer/radio/propagation \
+    -I../../inet/src/linklayer/ieee80211/radio/errormodel \
+    -I../../inet/src/linklayer/radio \
+    -I../../inet/src/util/headerserializers/tcp \
+    -I../../inet/src/networklayer/ipv4 \
+    -I../../inet/src/mobility/contract \
+    -I../../inet/src/util/headerserializers/ipv4 \
+    -I../../inet/src/base \
+    -I../../inet/src/applications/ethernet \
+    -I../../inet/src/util/headerserializers \
+    -I../../inet/src/world/radio \
+    -I../../inet/src/linklayer/ieee80211/mac \
+    -I../../inet/src/networklayer/ipv6 \
+    -I../../inet/src/transport/sctp \
+    -I../../inet/src/util/headerserializers/udp \
+    -I../../inet/src/networklayer/ipv6tunneling \
+    -I../../inet/src/util/headerserializers/ipv6 \
+    -I../../inet/src/battery/models \
+    -I../../inet/src/applications/pingapp \
+    -I../../inet/src/util/headerserializers/sctp \
+    -I../../inet/src/linklayer/contract \
+    -I../../inet/src/networklayer/arp \
+    -I../../inet/src/transport/tcp_common \
+    -I../../inet/src/transport/udp \
+    -I. \
+    -IWireless \
+    -IWireless/results
 
 # Additional object and library files to link with
 EXTRA_OBJS =
 
 # Additional libraries (-L, -l options)
-LIBS =
+LIBS = -L../../inet/out/$(CONFIGNAME)/src  -linet
+LIBS += -Wl,-rpath,`abspath ../../inet/out/$(CONFIGNAME)/src`
 
 # Output directory
 PROJECT_OUTPUT_DIR = ../out
@@ -29,17 +70,20 @@ O = $(PROJECT_OUTPUT_DIR)/$(CONFIGNAME)/$(PROJECTRELATIVE_PATH)
 
 # Object files for local .cc and .msg files
 OBJS = \
-    $O/RoutingTable.o \
+    $O/APCli.o \
     $O/PortableDevice.o \
-    $O/Wireless.o \
+    $O/CustomRoutingTable.o \
     $O/Cache.o \
-    $O/AP.o \
     $O/CustomPacket.o \
     $O/Server_DNS.o \
-    $O/NodeTable.o
+    $O/NodeTable.o \
+    $O/Wireless/Wireless.o
 
 # Message files
 MSGFILES =
+
+# Other makefile variables (-K)
+INET_PROJ=../../inet
 
 #------------------------------------------------------------------------------
 
@@ -65,7 +109,7 @@ include $(CONFIGFILE)
 OMNETPP_LIB_SUBDIR = $(OMNETPP_LIB_DIR)/$(TOOLCHAIN_NAME)
 OMNETPP_LIBS = -L"$(OMNETPP_LIB_SUBDIR)" -L"$(OMNETPP_LIB_DIR)" -loppmain$D $(USERIF_LIBS) $(KERNEL_LIBS) $(SYS_LIBS)
 
-COPTS = $(CFLAGS)  $(INCLUDE_PATH) -I$(OMNETPP_INCL_DIR)
+COPTS = $(CFLAGS) -DINET_IMPORT $(INCLUDE_PATH) -I$(OMNETPP_INCL_DIR)
 MSGCOPTS = $(INCLUDE_PATH)
 
 # we want to recompile everything if COPTS changes,
@@ -113,40 +157,55 @@ clean:
 	$(Q)-rm -rf $O
 	$(Q)-rm -f servicediscovery servicediscovery.exe libservicediscovery.so libservicediscovery.a libservicediscovery.dll libservicediscovery.dylib
 	$(Q)-rm -f ./*_m.cc ./*_m.h
+	$(Q)-rm -f Wireless/*_m.cc Wireless/*_m.h
+	$(Q)-rm -f Wireless/results/*_m.cc Wireless/results/*_m.h
 
 cleanall: clean
 	$(Q)-rm -rf $(PROJECT_OUTPUT_DIR)
 
 depend:
 	$(qecho) Creating dependencies...
-	$(Q)$(MAKEDEPEND) $(INCLUDE_PATH) -f Makefile -P\$$O/ -- $(MSG_CC_FILES)  ./*.cc
+	$(Q)$(MAKEDEPEND) $(INCLUDE_PATH) -f Makefile -P\$$O/ -- $(MSG_CC_FILES)  ./*.cc Wireless/*.cc Wireless/results/*.cc
 
 # DO NOT DELETE THIS LINE -- make depend depends on it.
-$O/AP.o: AP.cc \
-	AP.h \
+$O/APCli.o: APCli.cc \
+	$(INET_PROJ)/src/base/Compat.h \
+	$(INET_PROJ)/src/base/INETDefs.h \
+	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
+	APCli.h \
 	Cache.h \
 	CustomPacket.h \
+	CustomRoutingTable.h \
 	NodeTable.h \
-	PortableDevice.h \
-	RoutingTable.h
+	PortableDevice.h
 $O/Cache.o: Cache.cc \
 	Cache.h
 $O/CustomPacket.o: CustomPacket.cc \
 	CustomPacket.h
+$O/CustomRoutingTable.o: CustomRoutingTable.cc \
+	CustomRoutingTable.h
 $O/NodeTable.o: NodeTable.cc \
 	NodeTable.h
 $O/PortableDevice.o: PortableDevice.cc \
+	$(INET_PROJ)/src/base/Compat.h \
+	$(INET_PROJ)/src/base/INETDefs.h \
+	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h \
+	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
 	Cache.h \
 	CustomPacket.h \
+	CustomRoutingTable.h \
 	NodeTable.h \
 	PortableDevice.h \
-	RoutingTable.h
-$O/RoutingTable.o: RoutingTable.cc \
-	RoutingTable.h
+	Wireless/Wireless.h
 $O/Server_DNS.o: Server_DNS.cc \
 	CustomPacket.h \
 	NodeTable.h \
 	Server_DNS.h
-$O/Wireless.o: Wireless.cc \
-	Wireless.h
+$O/Wireless/Wireless.o: Wireless/Wireless.cc \
+	$(INET_PROJ)/src/applications/ethernet/EtherApp_m.h \
+	$(INET_PROJ)/src/base/Compat.h \
+	$(INET_PROJ)/src/base/INETDefs.h \
+	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h \
+	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
+	Wireless/Wireless.h
 

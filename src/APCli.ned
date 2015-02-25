@@ -13,24 +13,18 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __SERVICEDISCOVERY_AP_H_
-#define __SERVICEDISCOVERY_AP_H_
+package servicediscovery;
 
-#include <omnetpp.h>
-#include "PortableDevice.h"
-
-/**
- * TODO - Generated class
- */
-class AP : public PortableDevice
+//
+// TODO auto-generated module
+//
+simple APCli
 {
-  protected:
-    virtual void initialize();
-    virtual void handleMessage(cMessage *msg);
-    virtual void Register(CustomPacket *packet);
-    virtual void Query(CustomPacket *packet);
-    int DNS, Location;
-    int ServiceArray[SERVICENUM];
-};
-
-#endif
+    parameters:
+    	@display("i=device/accesspoint");
+    	int location = default(0);
+  	gates:
+  	    input in;
+  	    output out;
+    	inout g;
+}

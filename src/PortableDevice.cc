@@ -13,8 +13,28 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "PortableDevice.h"
-#include <string.h>
+#include <carray.h>
+#include <cdisplaystring.h>
+#include <cenvir.h>
+#include <cgate.h>
+#include <clistener.h>
+#include <cmsgpar.h>
+#include <cobjectfactory.h>
+#include <cregistrationlist.h>
+#include <csimulation.h>
+#include <Compat.h>
+#include <distrib.h>
+#include <Ieee802Ctrl_m.h>
+#include <onstartup.h>
+#include <PortableDevice.h>
+#include <regmacros.h>
+#include <simutil.h>
+#include <stddef.h>
+//#include <string.h>
+#include <Wireless.h>
+#include <cstdio>
+#include <cstdlib>
+
 Define_Module(PortableDevice);
 
 /*
@@ -24,46 +44,49 @@ Define_Module(PortableDevice);
  *
  *  CustomPacket is customized version of cMessage
  */
+simsignal_t PortableDevice::sentPkSignal = registerSignal("sentPk");
+simsignal_t PortableDevice::rcvdPkSignal = registerSignal("rcvdPk");
+
 
 void PortableDevice::initialize()
 {
 
     ID = getId();
-    Service = intuniform(0, SERVICENUM);
-    int APs = getParentModule()->par("APs");
+    Service = intuniform(0, SERVICENUM - 1);
+    MacAddress.setAddress(getParentModule()->getSubmodule("wlan")->getSubmodule("mac")->par("address"));
+    int APs = getParentModule()->getParentModule()->par("APs");
 
-    CustomPacket *hello = GeneratePacket("hello", 255, 0, HELLO, 1);
-    timer1 = new CustomPacket("timer1");
-    timer2 = new CustomPacket("timer2");
-    findAP = GeneratePacket("findAP", 255, APSERVICE, REGISTER, 5);
-    query =  GeneratePacket("query", 255, intuniform(0, SERVICENUM), QUERY, 5);
+
+    hello = GeneratePacket("hello", 255, 0, HELLO, 1);
+    nodeRegister = GeneratePacket("nodeRegister", 255, APSERVICE, REGISTER, 5);
+    query =  GeneratePacket("query", 255, intuniform(0, SERVICENUM - 1), QUERY, 5);
+
+    helloTimer = new CustomPacket("helloTimer");
+    registerTimer = new CustomPacket("registerTimer");
+    queryTimer = new CustomPacket("queryTimer");
+
     query->SetLocation(intuniform(0, APs));
+
     string s;
     stringstream out;
     out << ID <<"," << Service << "|";
     s = out.str();
     hello->SetLastHop(s);
-    findAP->SetLastHop(s);
+    nodeRegister->SetLastHop(s);
     query->SetLastHop(s);
 
-    currentState = HELLO;
-    EV << ID << " Send Hello Message" << endl;
-    forwardMessage(hello);
 
-    if(strstr(getFullName(), "AP") == NULL){
-        scheduleAt(1, timer1);
-        scheduleAt(uniform(2, 5), timer2);
-    }
-    else
-    {
-        delete timer1;
-        delete timer2;
-        delete findAP;
-    }
+
+    scheduleAt(uniform(1, 5), helloTimer);
+    scheduleAt(uniform(10, 15), registerTimer);
+    scheduleAt(uniform(20, 25), queryTimer);
+
+
     //getDisplayString()
 }
 
-void PortableDevice::UpdateTables(string lastHop, int gateId, int hopCount){
+void PortableDevice::UpdateTables(string lastHop, string macAddress, int hopCount){
+
     string token, secondToken;
     size_t pos, secondPos;
     string delimiter = "|", secondDelimiter = ",";
@@ -78,11 +101,55 @@ void PortableDevice::UpdateTables(string lastHop, int gateId, int hopCount){
 
         token.erase(0, secondPos + secondDelimiter.length());
 
-
-        routingTable.UpdateEntry(id, gateId, hopCount);
-        nodeTable.UpdateEntry(id, atoi(token.c_str()), 0, 10); // How to decrease life time??
+        routingTable.UpdateEntry(id, macAddress, hopCount--);
+        nodeTable.UpdateEntry(id, atoi(token.c_str()), 0, 10);
 
         lastHop.erase(0, pos + delimiter.length());
+    }
+
+
+}
+void PortableDevice::UpdateRoutingTable(string routingInfo, string macAddress){
+    string token, secondToken;
+    size_t pos, secondPos;
+    string delimiter = "|", secondDelimiter = ",";
+    while ((pos = routingInfo.find(delimiter)) != string::npos) {
+
+        token = routingInfo.substr(0, pos);
+
+        secondPos = token.find(secondDelimiter);
+        secondToken = token.substr(0, secondPos);
+
+        token.erase(0, secondPos + secondDelimiter.length());
+
+        int id = atoi(secondToken.c_str());
+        int hopCount = atoi(token.c_str()) + 1;
+
+        routingTable.UpdateEntry(id, macAddress, hopCount);
+
+        routingInfo.erase(0, pos + delimiter.length());
+    }
+
+}
+void PortableDevice::UpdateNodeTable(string nodeInfo){
+    string token, secondToken;
+    size_t pos, secondPos;
+    string delimiter = "|", secondDelimiter = ",";
+    while ((pos = nodeInfo.find(delimiter)) != string::npos) {
+
+        token = nodeInfo.substr(0, pos);
+
+        secondPos = token.find(secondDelimiter);
+        secondToken = token.substr(0, secondPos);
+
+        token.erase(0, secondPos + secondDelimiter.length());
+
+        int id = atoi(secondToken.c_str());
+        int service = atoi(token.c_str());
+
+        nodeTable.UpdateEntry(id, service, 0, 10);
+
+        nodeInfo.erase(0, pos + delimiter.length());
     }
 
 }
@@ -93,15 +160,27 @@ void PortableDevice::handleMessage(cMessage *msg)
 
     if(msg->isSelfMessage())
     {
-        if(msg == timer1){
+        if(msg == helloTimer){
+            currentState = HELLO;
+            EV << ID << " Send Hello Message" << endl;
+
+            forwardMessage(hello);
+
+            UpdateDisplay();
+        }
+        else if(msg == registerTimer)
+        {
             int targetId = nodeTable.FindService(APSERVICE);
 
-            EV << "Node:" << ID << " send message " << findAP << " to find AP" << "\n";
+            EV << "Node:" << ID << " send message " << nodeRegister << " to register" << "\n";
             currentState = REGISTER;
-            findAP->SetDestination(targetId != -1 ? targetId : 255);
-            forwardMessage(findAP);
+            nodeRegister->SetDestination(targetId != -1 ? targetId : 255);
+            nodeRegister->setKind(3);
 
-        }else{
+            forwardMessage(nodeRegister);
+        }
+        else
+        {
             if(nodeTable.FindService(query->GetDestinationService()) == -1 && query->GetDestinationService() != Service){
                 // This is selfMessage
                 EV << "Node:" << ID << " send message " << query << " to find Service:" << query->GetDestinationService() << "\n";
@@ -120,8 +199,12 @@ void PortableDevice::handleMessage(cMessage *msg)
 
         delete packet;
 
+        UpdateDisplay();
+
         return;
     }
+
+    emit(rcvdPkSignal, msg);
 
     if(cache.checkEntry(packet->GetSource(), packet->GetSeqNum()) ||
             (packet->GetOriginSourceId() != 0 ? cache.checkEntry(packet->GetOriginSourceId(), packet->GetOriginSourceSeqNum()): false))
@@ -134,8 +217,9 @@ void PortableDevice::handleMessage(cMessage *msg)
     packet->SetHopCount(packet->GetHopCount() + 1);
     packet->SetMaxHopCount(packet->GetMaxHopCount() - 1);
 
+    Ieee802Ctrl *ctrl = check_and_cast<Ieee802Ctrl *>(packet->getControlInfo());
     //Update it's tables (Routing, Node) and cache
-    UpdateTables(packet->GetLastHop(), gateBaseId("g$o") + packet->getArrivalGate()->getIndex(), packet->GetHopCount());
+    UpdateTables(packet->GetLastHop(), ctrl->getSrc().str(), packet->GetHopCount());
     cache.AddEntry(packet->GetSource(), packet->GetSeqNum());
 
 
@@ -173,6 +257,7 @@ void PortableDevice::Register(CustomPacket *packet){
         out << ID << "," << Service << "|";
         notice->SetLastHop(out.str());
         notice->SetOriginSourceSeqNum(packet->GetSeqNum());
+        notice->setKind(1);
 
         forwardMessage(notice);
         delete packet;
@@ -191,10 +276,13 @@ void PortableDevice::Register(CustomPacket *packet){
         lastHop = out.str();
         packet->SetLastHop(lastHop);
 
+        if(packet->GetDestination() == 255){
+            int targetId = nodeTable.FindService(APSERVICE);
+            packet->SetDestination(targetId != -1 ? targetId : 255);
+        }
 
         forwardMessage(packet);
     }
-
 }
 void PortableDevice::Hello(CustomPacket *packet){
     CustomPacket *reply = GeneratePacket("reply", packet->GetSource(), 0, REPLY, 1);
@@ -202,6 +290,17 @@ void PortableDevice::Hello(CustomPacket *packet){
 
     out << ID << "," << Service << "|";
     reply->SetLastHop(out.str());
+
+    //EV << nodeTable.GetEntries() << endl;
+    //EV << routingTable.GetEntries() << endl;
+
+    cMsgPar *nodeInfo = new cMsgPar("nodeInfo");
+    cMsgPar *routingInfo = new cMsgPar("routingInfo");
+    nodeInfo->setStringValue(nodeTable.GetEntries().c_str());
+    routingInfo->setStringValue(routingTable.GetEntries().c_str());
+    reply->addPar(nodeInfo);
+    reply->addPar(routingInfo);
+    reply->setKind(0);
 
     forwardMessage(reply);
     delete packet;
@@ -235,7 +334,7 @@ void PortableDevice::Notice(CustomPacket *packet){
     }
     else
     {
-        if(currentState == QUERY /*|| currentState == REGISTER*/ ){
+        if(packet->getKind() == 2 /*|| currentState == REGISTER*/ ){
             EV << "Node:" << ID << " can not find service:" << Service << endl;
             EV << "Node:" << ID << " retransmit packet to find service:" << Service << endl;
             CustomPacket *retransmit = GeneratePacket("retransmit", packet->GetSource(), packet->GetDestinationService(), RETRANSMIT, packet->GetHopCount());
@@ -258,12 +357,31 @@ void PortableDevice::Reply(CustomPacket *packet){
     }
     else
     {
-        if(currentState == HELLO){
-            EV << ID << " Get Hello Message" << endl;
-        }else if(currentState == QUERY){
+        //EV << "kind: " << packet->getKind() << endl;
+        // 0: hello, 1: register, 2: query
+        int kind = packet->getKind();
+        if(kind == 0){
+            EV << ID << " Get Hello Reply Message" << endl;
+            cArray arr = packet->getParList();
+
+            cMsgPar *nodeInfo = (cMsgPar *)arr[arr.find("nodeInfo")];
+            cMsgPar *routingInfo = (cMsgPar *)arr[arr.find("routingInfo")];
+
+            Ieee802Ctrl *ctrl = check_and_cast<Ieee802Ctrl *>(packet->getControlInfo());
+
+            UpdateRoutingTable(routingInfo->stringValue(), ctrl->getSrc().str());
+            UpdateNodeTable(nodeInfo->stringValue());
+
+            arr.remove(nodeInfo);
+            arr.remove(routingInfo);
+            delete nodeInfo;
+            delete routingInfo;
+
+        }else if(kind == 2){
             EV << "Node:" << ID << " find Service:" << Service << "\n";
+            currentState = -1;
         }
-        currentState = -1;
+        UpdateDisplay();
         delete packet;
     }
 }
@@ -276,6 +394,7 @@ CustomPacket* PortableDevice::GeneratePacket(const char* name, int destinationId
     newPacket->SetSeqNum(seqNum++);
     newPacket->SetType(type);
     newPacket->SetMaxHopCount(maxHopCount);
+    newPacket->SetHopCount(0);
 
     return newPacket;
 }
@@ -294,6 +413,7 @@ void PortableDevice::Query(CustomPacket *packet){
 
         out << targetId << "," << packet->GetDestinationService() << "|"; //To reach destination service, Source should send packet to this node.
         reply->SetLastHop(out.str());
+        reply->setKind(2);
 
         forwardMessage(reply);
         delete packet;
@@ -306,6 +426,7 @@ void PortableDevice::Query(CustomPacket *packet){
         out << ID << "," << Service << "|";
         notice->SetLastHop(out.str());
         notice->SetOriginSourceSeqNum(packet->GetSeqNum());
+        notice->setKind(2);
 
         forwardMessage(notice);
         delete packet;
@@ -333,33 +454,37 @@ void PortableDevice::Query(CustomPacket *packet){
 
 void PortableDevice::forwardMessage(CustomPacket *packet)
 {
+    MACAddress destMACAddress;
+
     //Boradcast
     if(packet->GetDestination() == 255)
     {
-        int n = gateSize("g$o");
-        int outGateBaseId = gateBaseId("g$o");
-        int senderIndex = packet->getArrivalGate() != NULL ? packet->getArrivalGate()->getIndex() : -1;
-
-        for (int i=0; i<n; i++)
-        {
-            if( i == senderIndex) continue;
-            send(i==n-1 ? packet : packet->dup(), outGateBaseId+i);
-        }
+        destMACAddress.setBroadcast();
     }
     else
     {
-        int gateId = routingTable.FindPath(packet->GetDestination());
-        if(gateId == -1)
-        {
-            int n = gateSize("g");
-            int outGateBaseId = gateBaseId("g$o");
-            for (int i=0; i<n; i++)
-               send(i==n-1 ? packet : packet->dup(), outGateBaseId+i);
-        }
+        //find and set macaddress
+        string nextHop = routingTable.FindPath(packet->GetDestination());
+        if(nextHop.length() == 0)
+            destMACAddress.setBroadcast();
         else
-        {
-            //When this table has corresponding routing entry
-            send(packet, gateId);
-        }
+            destMACAddress.setAddress(nextHop.c_str());
     }
+    Ieee802Ctrl *etherctrl = new Ieee802Ctrl();
+    etherctrl->setDest(destMACAddress);
+    etherctrl->setSrc(MacAddress);
+
+    packet->removeControlInfo();
+    packet->setControlInfo(etherctrl);
+    emit(sentPkSignal, packet);
+
+    EV << "Node " << MacAddress << " send packet to " << destMACAddress << endl;
+
+    send(packet, "out");
+}
+void PortableDevice::UpdateDisplay()
+{
+    char buf[40];
+    sprintf(buf, "My Service: %d, Current State: %d", Service, currentState);
+    getDisplayString().setTagArg("t",0,buf);
 }

@@ -13,19 +13,24 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __SERVICEDISCOVERY_WIRELESSNODE_H_
-#define __SERVICEDISCOVERY_WIRELESSNODE_H_
+#ifndef __SERVICEDISCOVERY_AP_H_
+#define __SERVICEDISCOVERY_AP_H_
 
 #include <omnetpp.h>
+#include "PortableDevice.h"
 
 /**
  * TODO - Generated class
  */
-class Wireless : public cSimpleModule
+class APCli : public PortableDevice
 {
   protected:
     virtual void initialize();
     virtual void handleMessage(cMessage *msg);
+    virtual void Register(CustomPacket *packet);
+    virtual void Query(CustomPacket *packet);
+    int Location;
+    int ServiceArray[SERVICENUM];
 };
 
 #endif

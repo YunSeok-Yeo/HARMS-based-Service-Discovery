@@ -27,9 +27,10 @@
 #include <omnetpp.h>
 #include <string>
 #include <sstream>
+#include <MACAddress.h>
 #include "CustomPacket.h"
 #include "NodeTable.h"
-#include "RoutingTable.h"
+#include "CustomRoutingTable.h"
 #include "Cache.h"
 #define SERVICENUM 10
 /**
@@ -49,16 +50,22 @@ class PortableDevice : public cSimpleModule
         virtual void Retransmit(CustomPacket *packet);
         virtual void Hello(CustomPacket *packet);
         virtual void Register(CustomPacket *packet);
+        virtual void UpdateDisplay();
         virtual CustomPacket* GeneratePacket(const char *name, int destinationId, int destinationService, int type, int maxHopCount);
-        void UpdateTables(string lastHop, int gateId, int maxHopCount);
+        void UpdateTables(string lastHop, string macAddress, int maxHopCount);
+        void UpdateNodeTable(string nodeInfo);
+        void UpdateRoutingTable(string routingInfo, string macAddress);
         int Service;
         int ID;
-        CustomPacket *query, *timer1, *findAP, *timer2;
+        MACAddress MacAddress;
+        CustomPacket *hello, *query, *nodeRegister, *helloTimer, *queryTimer, *registerTimer;
         NodeTable nodeTable;
-        RoutingTable routingTable;
+        CustomRoutingTable routingTable;
         Cache cache;
         int seqNum;
         int currentState;
+        static simsignal_t sentPkSignal;
+        static simsignal_t rcvdPkSignal;
 };
 
 

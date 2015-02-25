@@ -15,39 +15,14 @@
 
 package servicediscovery;
 
-//
-// TODO auto-generated type
-//
-
 import inet.world.radio.ChannelControl;
 
 
-channel Link extends ned.DatarateChannel
-{
-    parameters:
-        int cost = default(0);
-        @display("ls=red,,d");
-}
-
-channel WiredLink extends ned.DatarateChannel
-{
-    parameters:
-        int cost = default(0);
-}
-network Simpletest
+network Adhoc
 {
     parameters:
         int APs = 2;
     submodules:
-        Server: Server_DNS {
-            @display("p=291,36");
-        }
-        AP1: AP {
-            @display("p=157,127");
-        }
-        AP2: AP {
-            @display("p=414,133");
-        }
         WirelessNode0: WirelessNode {
             @display("p=433,330");
         }
@@ -85,8 +60,5 @@ network Simpletest
             parameters:
                 @display("p=61,46");
         }
-    connections:
-
-        Server.g++ <--> WiredLink <--> AP1.g;
-        Server.g++ <--> WiredLink <--> AP2.g;
+    connections allowunconnected:
 }

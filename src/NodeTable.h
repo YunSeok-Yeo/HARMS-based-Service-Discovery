@@ -29,6 +29,7 @@ public:
     void UpdateEntry(int nodeId, int nodeService, int nodeLocation, int nodeLifeTime);
     int GetTableSize();
     int FindService(int service);
+    string GetEntries();
 };
 
 
